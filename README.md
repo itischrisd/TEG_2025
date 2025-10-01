@@ -7,8 +7,9 @@ A comprehensive course on Generative AI—from foundational concepts to advanced
 ## 📚 Course Materials
 
 ### 1. Introduction
-**Lectures: ** [Placeholder - Add lecture video link]
-**Demo:** [Placeholder - Add demo video link]
+**Lectures:** [Placeholder - Will appear here soon]
+
+**Demo:** [Placeholder - Will appear here soon]
 
 
 **Slides:**
@@ -22,8 +23,8 @@ A comprehensive course on Generative AI—from foundational concepts to advanced
 ---
 
 ### 2. Transformers
-**Lectures: ** [Placeholder - Add lecture video link]
-**Demo:** [Placeholder - Add demo video link]
+**Lectures:** [Placeholder - Will appear here soon]
+**Demo:** [Placeholder - Will appear here soon]
 
 **Slides:**
 - [Tokenization](https://github.com/wodecki/TEG_2025/blob/main/slides/2.%20Transformers/1.%20Tokenization.pptx)
@@ -37,8 +38,8 @@ A comprehensive course on Generative AI—from foundational concepts to advanced
 ---
 
 ### 3. Retrieval Augmented Generation (RAG)
-**Lectures: ** [Placeholder - Add lecture video link]
-**Demo:** [Placeholder - Add demo video link]
+**Lectures:** [Placeholder - Will appear here soon]
+**Demo:** [Placeholder - Will appear here soon]
 
 **Slides:**
 - [RAG - Fundamentals](https://github.com/wodecki/TEG_2025/blob/main/slides/3.%20Retrieval%20Augmented%20Generation/1.%20RAG%20-%20fundamentals.pptx)
@@ -49,8 +50,8 @@ A comprehensive course on Generative AI—from foundational concepts to advanced
 ---
 
 ### 4. Graphs
-**Lectures: ** [Placeholder - Add lecture video link]
-**Demo:** [Placeholder - Add demo video link]
+**Lectures:** [Placeholder - Will appear here soon]
+**Demo:** [Placeholder - Will appear here soon]
 
 **Slides:**
 - [Chains and Graphs](https://github.com/wodecki/TEG_2025/blob/main/slides/4.%20Graphs/1.%20Chains%20and%20graphs.pptx)
@@ -60,8 +61,8 @@ A comprehensive course on Generative AI—from foundational concepts to advanced
 ---
 
 ### 5. Tools and Agents
-**Lectures: ** [Placeholder - Add lecture video link]
-**Demo:** [Placeholder - Add demo video link]
+**Lectures:** [Placeholder - Will appear here soon]
+**Demo:** [Placeholder - Will appear here soon]
 
 **Slides:**
 - [Tools and Agents](https://github.com/wodecki/TEG_2025/blob/main/slides/5.%20Tools%20and%20Agents/1.%20Tools%20and%20agents.pptx)
@@ -73,8 +74,8 @@ A comprehensive course on Generative AI—from foundational concepts to advanced
 ---
 
 ### 6. Model Context Protocol (MCP)
-**Lectures: ** [Placeholder - Add lecture video link]
-**Demo:** [Placeholder - Add demo video link]
+**Lectures:** [Placeholder - Will appear here soon]
+**Demo:** [Placeholder - Will appear here soon]
 
 **Slides:**
 - [Functions, Agents and Tools - Rethought](https://github.com/wodecki/TEG_2025/blob/main/slides/6.%20MCP/1.%20Functions%20Agents%20and%20Tools%20-%20rethinked.pptx)
