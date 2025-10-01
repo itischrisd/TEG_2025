@@ -7,10 +7,8 @@ A comprehensive course on Generative AI—from foundational concepts to advanced
 ## 📚 Course Materials
 
 ### 1. Introduction
-**Lectures:** [Course Introduction](https://www.youtube.com/watch?v=46FcfsccTyk)
-
-**Demo:** [Placeholder - Will appear here soon]
-
+**Lectures:** 
+[Course Introduction](https://www.youtube.com/watch?v=46FcfsccTyk)
 
 **Slides:**
 - [Intro](https://github.com/wodecki/TEG_2025/blob/main/slides/1.%20Intro/0.%20Intro.pptx)
