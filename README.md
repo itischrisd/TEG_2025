@@ -10,7 +10,14 @@ A comprehensive course on Generative AI—from foundational concepts to advanced
 **Lectures:** 
 [Course Introduction](https://www.youtube.com/watch?v=46FcfsccTyk)
 
+How GenAI works [placeholder - will appear here soon]
+
+**Demo**:
+
+First Interaction with the LLM [placeholder - will appear here soon]
+
 **Slides:**
+
 - [Intro](https://github.com/wodecki/TEG_2025/blob/main/slides/1.%20Intro/0.%20Intro.pptx)
 - [Foundation Models](https://github.com/wodecki/TEG_2025/blob/main/slides/1.%20Intro/1.%20Intro%20-%20Foundation%20models.pptx)
 - [Tech Stack](https://github.com/wodecki/TEG_2025/blob/main/slides/1.%20Intro/2.%20Tech%20Stack.pptx)
@@ -20,8 +27,15 @@ A comprehensive course on Generative AI—from foundational concepts to advanced
 
 ---
 
-### 2. Transformers
-**Lectures:** [Placeholder - Will appear here soon]
+### 2. Tokenization, Embeddings, and Transformers
+**Lectures:** 
+
+1. Tokenization [placeholder - will appear here soon]
+2. Embeddings [placeholder - will appear here soon]
+3. Transformers - attention [placeholder - will appear here soon]
+4. Transformers - Multi-Layer Perceptron [placeholder - will appear here soon]
+5. Transformers - Prediction [placeholder - will appear here soon]
+
 **Demo:** [Placeholder - Will appear here soon]
 
 **Slides:**
@@ -36,7 +50,11 @@ A comprehensive course on Generative AI—from foundational concepts to advanced
 ---
 
 ### 3. Retrieval Augmented Generation (RAG)
-**Lectures:** [Placeholder - Will appear here soon]
+**Lectures:** 
+
+1. RAG - foundations [placeholder - will appear here soon]
+2. RAG - evaluation [placeholder - will appear here soon]
+
 **Demo:** [Placeholder - Will appear here soon]
 
 **Slides:**
