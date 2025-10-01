@@ -1,6 +1,6 @@
-# TEG 2025 E-learning: Comprehensive GenAI Course Materials
+# TEG 2025: GenAI Course Materials
 
-A comprehensive educational repository for learning Generative AI concepts, from foundations to advanced implementations.
+An educational repository for learning Generative AI concepts, from foundations to advanced implementations.
 
 ## 📚 Course Structure
 
@@ -59,7 +59,7 @@ curl -LsSf https://astral.sh/uv/install.sh | sh
 2. Clone this repository:
 ```bash
 git clone <repository-url>
-cd TEG_2025_elearning
+cd TEG_2025
 ```
 
 3. Install root dependencies:
@@ -174,11 +174,3 @@ uv run python script.py    # Run module scripts
 ## 📝 License
 
 This project is for educational purposes.
-
-## 🤝 Contributing
-
-This is an educational repository. Contributions that enhance learning materials are welcome.
-
-## 📧 Contact
-
-For questions about the course materials, please open an issue in this repository.
