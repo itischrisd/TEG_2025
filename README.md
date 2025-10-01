@@ -7,7 +7,7 @@ A comprehensive course on Generative AI—from foundational concepts to advanced
 ## 📚 Course Materials
 
 ### 1. Introduction
-**Lectures:** [Placeholder - Will appear here soon]
+**Lectures:** [Course Introduction](https://www.youtube.com/watch?v=46FcfsccTyk)
 
 **Demo:** [Placeholder - Will appear here soon]
 
