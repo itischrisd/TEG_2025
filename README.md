@@ -17,7 +17,7 @@ A comprehensive course on Generative AI—from foundational concepts to advanced
 
 First Interaction with the LLM [placeholder - will appear here soon]
 
-**Slides:**(https://github.com/wodecki/TEG_2025/blob/main/slides/1.%20Intro/)
+**Slides:**[slides/1.%20Intro/]
 
 - [Intro](https://github.com/wodecki/TEG_2025/blob/main/slides/1.%20Intro/0.%20Intro.pptx)
 - [Foundation Models](https://github.com/wodecki/TEG_2025/blob/main/slides/1.%20Intro/1.%20Intro%20-%20Foundation%20models.pptx)
