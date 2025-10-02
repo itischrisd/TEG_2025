@@ -33,12 +33,7 @@ First Interaction with the LLM [placeholder - will appear here soon]
 
 **Demo:** [Placeholder - Will appear here soon]
 
-**Slides:**
-- [Tokenization](https://github.com/wodecki/TEG_2025/blob/main/slides/2.%20Transformers/1.%20Tokenization.pptx)
-- [Embeddings](https://github.com/wodecki/TEG_2025/blob/main/slides/2.%20Transformers/2.%20Embeddings.pptx)
-- [Transformers - Attention](https://github.com/wodecki/TEG_2025/blob/main/slides/2.%20Transformers/3.1.%20Transformers%20-%20attention.pptx)
-- [Transformers - Knowledge](https://github.com/wodecki/TEG_2025/blob/main/slides/2.%20Transformers/3.2.%20Transformers%20-%20knowledge.pptx)
-- [Transformers - Next Word Prediction](https://github.com/wodecki/TEG_2025/blob/main/slides/2.%20Transformers/3.3.%20Transformers%20-%20next%20word%20prediction.pptx)
+**Slides:** [slides/2. Transformers](https://github.com/wodecki/TEG_2025/blob/main/slides/2.%20Transformers)
 
 **Code:** [src/2. Models](https://github.com/wodecki/TEG_2025/tree/main/src/2.%20Models)
 
@@ -51,9 +46,7 @@ First Interaction with the LLM [placeholder - will appear here soon]
 
 **Demo:** [Placeholder - Will appear here soon]
 
-**Slides:**
-- [RAG - Fundamentals](https://github.com/wodecki/TEG_2025/blob/main/slides/3.%20Retrieval%20Augmented%20Generation/1.%20RAG%20-%20fundamentals.pptx)
-- [RAG - Evaluation](https://github.com/wodecki/TEG_2025/blob/main/slides/3.%20Retrieval%20Augmented%20Generation/2.%20RAG%20-%20evaluation.pptx)
+**Slides:** [slides/3. Retrieval Augmented Generation](https://github.com/wodecki/TEG_2025/blob/main/slides/3.%20Retrieval%20Augmented%20Generation)
 
 **Code:** [src/3. Retrieval Augmented Generation](https://github.com/wodecki/TEG_2025/tree/main/src/3.%20Retrieval%20Augmented%20Generation)
 
@@ -61,10 +54,10 @@ First Interaction with the LLM [placeholder - will appear here soon]
 
 ### 4. Graphs
 **Lectures:** [Placeholder - Will appear here soon]
+
 **Demo:** [Placeholder - Will appear here soon]
 
-**Slides:**
-- [Chains and Graphs](https://github.com/wodecki/TEG_2025/blob/main/slides/4.%20Graphs/1.%20Chains%20and%20graphs.pptx)
+**Slides:** [slides/4. Graphs](https://github.com/wodecki/TEG_2025/blob/main/slides/4.%20Graphs)
 
 **Code:** [src/4. Graphs](https://github.com/wodecki/TEG_2025/tree/main/src/4.%20Graphs)
 
@@ -72,12 +65,10 @@ First Interaction with the LLM [placeholder - will appear here soon]
 
 ### 5. Tools and Agents
 **Lectures:** [Placeholder - Will appear here soon]
+
 **Demo:** [Placeholder - Will appear here soon]
 
-**Slides:**
-- [Tools and Agents](https://github.com/wodecki/TEG_2025/blob/main/slides/5.%20Tools%20and%20Agents/1.%20Tools%20and%20agents.pptx)
-- [MultiAgent Structures and Agentic Mesh](https://github.com/wodecki/TEG_2025/blob/main/slides/5.%20Tools%20and%20Agents/2.%20MultiAgent%20Structures%20and%20Agentic%20Mesh.pptx)
-- [Agentic AI - Evaluation](https://github.com/wodecki/TEG_2025/blob/main/slides/5.%20Tools%20and%20Agents/3.%20Agentic%20AI%20-%20evaluation.pptx)
+**Slides:** [slides/5. Tools and Agents](https://github.com/wodecki/TEG_2025/blob/main/slides/5.%20Tools%20and%20Agents)
 
 **Code:** [src/5. Tools and Agents](https://github.com/wodecki/TEG_2025/tree/main/src/5.%20Tools%20and%20Agents)
 
@@ -87,10 +78,7 @@ First Interaction with the LLM [placeholder - will appear here soon]
 **Lectures:** [Placeholder - Will appear here soon]
 **Demo:** [Placeholder - Will appear here soon]
 
-**Slides:**
-- [Functions, Agents and Tools - Rethought](https://github.com/wodecki/TEG_2025/blob/main/slides/6.%20MCP/1.%20Functions%20Agents%20and%20Tools%20-%20rethinked.pptx)
-- [MCP - Protocol and Servers](https://github.com/wodecki/TEG_2025/blob/main/slides/6.%20MCP/2.%20MCP%20-%20Protocol%20and%20Servers.pptx)
-- [MCP vs A2A](https://github.com/wodecki/TEG_2025/blob/main/slides/6.%20MCP/3.%20MCP%20vs%20A2A.pptx)
+**Slides:** [slides/6. MCP](https://github.com/wodecki/TEG_2025/blob/main/slides/6.%20MCP)
 
 **Code:** [src/6. MCP](https://github.com/wodecki/TEG_2025/tree/main/src/6.%20MCP)
 
