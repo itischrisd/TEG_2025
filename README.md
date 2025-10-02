@@ -15,7 +15,8 @@ A comprehensive course on Generative AI—from foundational concepts to advanced
 
 **Demo**:
 
-First Interaction with the LLM [placeholder - will appear here soon]
+[First Interaction with the LLM (20:53)](https://youtu.be/xwz0UPodgHY)
+[Your First Chatbot App (06:10)(https://youtu.be/C9ireExNgvU?si=3vRY_Sv43WGmaa8a)
 
 **Slides:** [slides/1. Intro](https://github.com/wodecki/TEG_2025/blob/main/slides/1.%20Intro)
 
@@ -31,7 +32,8 @@ First Interaction with the LLM [placeholder - will appear here soon]
 - [Transformers - Multi-Layer Perceptron (15:38)](https://youtu.be/hpQcTglAByo)
 - [Transformers - Prediction (13:55)](https://youtu.be/4pRkJuKTaR0)
 
-**Demo:** [Placeholder - Will appear here soon]
+**Demo:**
+- [Embeddings (17:38)](https://youtu.be/zkfbIZlD89M)
 
 **Slides:** [slides/2. Transformers](https://github.com/wodecki/TEG_2025/blob/main/slides/2.%20Transformers)
 
