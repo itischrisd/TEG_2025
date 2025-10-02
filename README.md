@@ -8,9 +8,9 @@ A comprehensive course on Generative AI—from foundational concepts to advanced
 
 ### 1. Introduction
 **Lectures:** 
-[Course Introduction](https://www.youtube.com/watch?v=46FcfsccTyk)
+[Course Introduction (03:33)](https://www.youtube.com/watch?v=46FcfsccTyk)
 
-How GenAI works [placeholder - will appear here soon]
+[How GenAI Works? (26:38)](https://youtu.be/q-As4OK1f5E)
 
 **Demo**:
 
@@ -30,11 +30,11 @@ First Interaction with the LLM [placeholder - will appear here soon]
 ### 2. Tokenization, Embeddings, and Transformers
 **Lectures:** 
 
-1. Tokenization [placeholder - will appear here soon]
-2. Embeddings [placeholder - will appear here soon]
-3. Transformers - attention [placeholder - will appear here soon]
-4. Transformers - Multi-Layer Perceptron [placeholder - will appear here soon]
-5. Transformers - Prediction [placeholder - will appear here soon]
+[Tokenization (6:14)](https://youtu.be/mltPLwiCPZM)
+[Embeddings (23:54)](https://youtu.be/P2DnCGjcukA)
+[Transformers - attention (49:36)](https://youtu.be/8iarkQsyzbw)
+[Transformers - Multi-Layer Perceptron (15:38)](https://youtu.be/hpQcTglAByo)
+[Transformers - Prediction (13:55)](https://youtu.be/4pRkJuKTaR0)
 
 **Demo:** [Placeholder - Will appear here soon]
 
@@ -52,8 +52,8 @@ First Interaction with the LLM [placeholder - will appear here soon]
 ### 3. Retrieval Augmented Generation (RAG)
 **Lectures:** 
 
-1. RAG - foundations [placeholder - will appear here soon]
-2. RAG - evaluation [placeholder - will appear here soon]
+[RAG - foundations (21:41)](https://youtu.be/xtctSETgUgM)
+[RAG - evaluation (17:59)](https://youtu.be/MiTLJKbO1Q8)
 
 **Demo:** [Placeholder - Will appear here soon]
 
