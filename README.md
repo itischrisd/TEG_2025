@@ -2,6 +2,8 @@
 
 A comprehensive course on Generative AI—from foundational concepts to advanced implementations with RAG, agents, and workflows.
 
+[YouTube Playlist](https://www.youtube.com/playlist?list=PLOiItT5FLNRqp8sK9t-Hi2xRjZgg1SE44)
+
 ---
 
 ## 📚 Course Materials
