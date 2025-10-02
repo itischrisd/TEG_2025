@@ -8,16 +8,14 @@ A comprehensive course on Generative AI—from foundational concepts to advanced
 
 ### 1. Introduction
 **Lectures:** 
-[Course Introduction (03:33)](https://www.youtube.com/watch?v=46FcfsccTyk)
-
-[How GenAI Works? (26:38)](https://youtu.be/q-As4OK1f5E)
+- [Course Introduction (03:33)](https://www.youtube.com/watch?v=46FcfsccTyk)
+- [How GenAI Works? (26:38)](https://youtu.be/q-As4OK1f5E)
 
 **Demo**:
 
 First Interaction with the LLM [placeholder - will appear here soon]
 
 **Slides:**
-
 - [Intro](https://github.com/wodecki/TEG_2025/blob/main/slides/1.%20Intro/0.%20Intro.pptx)
 - [Foundation Models](https://github.com/wodecki/TEG_2025/blob/main/slides/1.%20Intro/1.%20Intro%20-%20Foundation%20models.pptx)
 - [Tech Stack](https://github.com/wodecki/TEG_2025/blob/main/slides/1.%20Intro/2.%20Tech%20Stack.pptx)
@@ -29,12 +27,11 @@ First Interaction with the LLM [placeholder - will appear here soon]
 
 ### 2. Tokenization, Embeddings, and Transformers
 **Lectures:** 
-
-[Tokenization (6:14)](https://youtu.be/mltPLwiCPZM)
-[Embeddings (23:54)](https://youtu.be/P2DnCGjcukA)
-[Transformers - attention (49:36)](https://youtu.be/8iarkQsyzbw)
-[Transformers - Multi-Layer Perceptron (15:38)](https://youtu.be/hpQcTglAByo)
-[Transformers - Prediction (13:55)](https://youtu.be/4pRkJuKTaR0)
+- [Tokenization (6:14)](https://youtu.be/mltPLwiCPZM)
+- [Embeddings (23:54)](https://youtu.be/P2DnCGjcukA)
+- [Transformers - attention (49:36)](https://youtu.be/8iarkQsyzbw)
+- [Transformers - Multi-Layer Perceptron (15:38)](https://youtu.be/hpQcTglAByo)
+- [Transformers - Prediction (13:55)](https://youtu.be/4pRkJuKTaR0)
 
 **Demo:** [Placeholder - Will appear here soon]
 
@@ -51,9 +48,8 @@ First Interaction with the LLM [placeholder - will appear here soon]
 
 ### 3. Retrieval Augmented Generation (RAG)
 **Lectures:** 
-
-[RAG - foundations (21:41)](https://youtu.be/xtctSETgUgM)
-[RAG - evaluation (17:59)](https://youtu.be/MiTLJKbO1Q8)
+- [RAG - foundations (21:41)](https://youtu.be/xtctSETgUgM)
+- [RAG - evaluation (17:59)](https://youtu.be/MiTLJKbO1Q8)
 
 **Demo:** [Placeholder - Will appear here soon]
 
