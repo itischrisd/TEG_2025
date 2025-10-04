@@ -17,6 +17,7 @@ import time
 from pathlib import Path
 from typing import List, Dict, Any, Optional
 import logging
+import toml
 
 from langchain_community.document_loaders import PyPDFLoader
 from langchain_text_splitters import RecursiveCharacterTextSplitter
@@ -33,8 +34,10 @@ logger = logging.getLogger(__name__)
 class NaiveRAGSystem:
     """Traditional RAG system using vector similarity search."""
 
-    def __init__(self):
+    def __init__(self, config_path: str = "utils/config.toml"):
         """Initialize the Naive RAG system."""
+        self.config = self._load_config(config_path)
+
         self.embeddings = OpenAIEmbeddings(
             model="text-embedding-3-small",
             api_key=os.getenv("OPENAI_API_KEY")
@@ -54,7 +57,7 @@ class NaiveRAGSystem:
         )
 
         # Directories
-        self.data_dir = Path("data/programmers")
+        self.data_dir = Path(self.config['output']['programmers_dir'])
         self.vector_db_dir = Path("./chroma_naive_rag_cv")
         self.results_dir = Path("results")
         self.results_dir.mkdir(exist_ok=True)
@@ -65,6 +68,16 @@ class NaiveRAGSystem:
         self.rag_chain = None
 
         logger.info("✓ Naive RAG System initialized")
+
+    def _load_config(self, config_path: str) -> dict:
+        """Load configuration from TOML file."""
+        if not os.path.exists(config_path):
+            raise ValueError(f"Configuration file not found: {config_path}")
+
+        with open(config_path, 'r') as f:
+            config = toml.load(f)
+
+        return config
 
     def load_cv_documents(self) -> List[Dict[str, Any]]:
         """Load and process all CV PDF documents."""
