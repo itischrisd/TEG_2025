@@ -64,51 +64,13 @@ Answer:
 """)
 
 # Create RAG chain
-rag_chain = (
-    {"context": retriever, "question": RunnablePassthrough()}
-    | prompt
-    | llm
-    | StrOutputParser()
-)
-
-
-
-# 3. Create embeddings and vector store
-print("Creating embeddings for chunks...")
-embeddings = OpenAIEmbeddings()
-vector_store = InMemoryVectorStore(embeddings)
-vector_store.add_documents(documents=chunks)
-
-# 4. Create retriever with multiple results
-retriever = vector_store.as_retriever(
-    search_type="similarity",
-    search_kwargs={"k": 4}  # Retrieve top 4 chunks
-)
-
-# 5. Create LLM and prompt
-llm = ChatOpenAI(model="gpt-4o-mini")
-
-prompt = ChatPromptTemplate.from_template("""
-You are an assistant for question-answering tasks.
-Use the following pieces of retrieved context to answer the question.
-The context consists of multiple text chunks that may contain relevant information.
-If you don't know the answer, just say that you don't know.
-Use three sentences maximum and keep the answer concise.
-
-Question: {question}
-
-Context: {context}
-
-Answer:
-""")
-
-# 6. Create RAG chain
 chunked_rag_chain = (
     {"context": retriever, "question": RunnablePassthrough()}
     | prompt
     | llm
     | StrOutputParser()
 )
+
 
 # Sample questions for testing
 questions = [
