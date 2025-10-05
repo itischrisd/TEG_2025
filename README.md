@@ -46,7 +46,16 @@ A comprehensive course on Generative AI—from foundational concepts to advanced
 - [RAG - foundations (21:41)](https://youtu.be/xtctSETgUgM)
 - [RAG - evaluation (17:59)](https://youtu.be/MiTLJKbO1Q8)
 
-**Demo:** [Placeholder - Will appear here soon]
+**Demo:** 
+- [Minimal RAG (20:41)](https://youtu.be/mJdh5C5yhRg)
+- [Chunking (9:14)](https://youtu.be/t_aAjH8Tbjg)
+- [Vector Stores (16:37)](https://youtu.be/YtbxYn9aaok)
+- [Document Loaders (19:54)](https://youtu.be/clxfF71jGH0)
+- [Advanced RAG Techniques (32:35)](https://youtu.be/Z5vBluV6RXw)
+- [RAG Evaluation with RAGAS (21:27)](https://youtu.be/SwswpFpreqU)
+- [GraphRAG with Neo4j - Part 1 (22:43)](https://youtu.be/tVOImldmChk)
+- [GraphRAG with Neo4j - Part 2 (6:17)](https://youtu.be/R62QnvCqeM0)
+- [GraphRAG with Neo4j - Part 3 (11:53)](https://youtu.be/xM-u56TalOQ)
 
 **Slides:** [slides/3. Retrieval Augmented Generation](https://github.com/wodecki/TEG_2025/blob/main/slides/3.%20Retrieval%20Augmented%20Generation)
 
@@ -55,7 +64,8 @@ A comprehensive course on Generative AI—from foundational concepts to advanced
 ---
 
 ### 4. Graphs
-**Lectures:** [Placeholder - Will appear here soon]
+**Lectures:**
+- [Chains and Graphs (37:15)](https://youtu.be/MKMycsxvEpI)
 
 **Demo:** [Placeholder - Will appear here soon]
 
@@ -66,7 +76,11 @@ A comprehensive course on Generative AI—from foundational concepts to advanced
 ---
 
 ### 5. Tools and Agents
-**Lectures:** [Placeholder - Will appear here soon]
+**Lectures:** 
+- [Tools and Agents (21:41)](https://youtu.be/p3vluBH5hww)
+- [Functions, LLMs, and Agents - a wider picture (16:54)](https://youtu.be/m2J5H27u2is)
+- [Multi-Agent Architectures (18:57)](https://youtu.be/6kJqOPFMmA0)
+- [Agentic AI Evaluation (17:21)](https://youtu.be/VkDY4Zh6Cac)
 
 **Demo:** [Placeholder - Will appear here soon]
 
@@ -77,7 +91,10 @@ A comprehensive course on Generative AI—from foundational concepts to advanced
 ---
 
 ### 6. Model Context Protocol (MCP)
-**Lectures:** [Placeholder - Will appear here soon]
+**Lectures:**
+- [Model Context Protocol - Introduction (35:50)](https://youtu.be/_eBMpvvijXI)
+- [MCP vs Agentic AI (8:40)](https://youtu.be/OsLQGOkfTr8)
+
 **Demo:** [Placeholder - Will appear here soon]
 
 **Slides:** [slides/6. MCP](https://github.com/wodecki/TEG_2025/blob/main/slides/6.%20MCP)
