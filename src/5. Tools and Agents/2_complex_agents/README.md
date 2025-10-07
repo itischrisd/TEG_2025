@@ -20,13 +20,6 @@ By completing this module, you will:
 - **Educational Progression**: Clear demonstration of how agents make decisions
 - **Tools**: Basic mathematical operations (multiply, add, divide)
 
-### `02_multi_tool_react_agent.py`
-**Advanced Multi-Tool Integration**
-- **Comprehensive Tool Suite**: Mathematical, external API simulation, text analysis, and data processing
-- **Simulated External APIs**: Weather, web search, and knowledge base tools for learning
-- **Complex Workflows**: Multi-step reasoning across different tool domains
-- **Production Patterns**: Proper error handling and result integration
-
 ### `multi_tool_agent_in_studio/`
 **LangGraph Studio Integration**
 - **Real External APIs**: Tavily search, weather, Wikipedia, and arXiv integration
