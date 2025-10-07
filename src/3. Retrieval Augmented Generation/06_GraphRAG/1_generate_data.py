@@ -28,7 +28,7 @@ fake = Faker()
 class GraphRAGDataGenerator:
     """Integrated generator for programmer profiles and realistic PDF CVs."""
 
-    def __init__(self, config_path: str = "config.toml"):
+    def __init__(self, config_path: str = "utils/config.toml"):
         """Initialize with required dependencies - fail fast if missing."""
         # Load configuration
         self.config = self._load_config(config_path)

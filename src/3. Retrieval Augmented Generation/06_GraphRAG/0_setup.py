@@ -25,11 +25,196 @@ from enum import Enum
 from typing import Dict, Any, Optional
 import logging
 
-# Neo4j utils moved to main functions
+# Neo4j utils
+from langchain_neo4j import Neo4jGraph
 
 # Configure logging
 logging.basicConfig(level=logging.INFO, format='%(message)s')
 logger = logging.getLogger(__name__)
+
+
+def check_docker_neo4j() -> Dict[str, Any]:
+    """Check Docker availability and Neo4j container status."""
+    status = {
+        'docker_available': False,
+        'neo4j_container': None,
+        'container_status': None
+    }
+
+    try:
+        # Check if Docker is running
+        result = subprocess.run(
+            ['docker', 'ps', '-a', '--format', '{{.Names}}\t{{.ID}}\t{{.Status}}'],
+            capture_output=True,
+            text=True,
+            timeout=5
+        )
+
+        if result.returncode == 0:
+            status['docker_available'] = True
+
+            # Look for Neo4j container
+            for line in result.stdout.strip().split('\n'):
+                if line and 'neo4j-graphrag' in line:
+                    parts = line.split('\t')
+                    if len(parts) >= 3:
+                        status['neo4j_container'] = parts[1]  # Container ID
+                        # Check if container is running
+                        status['container_status'] = 'Up' if 'Up' in parts[2] else 'Exited'
+                    break
+
+    except (subprocess.TimeoutExpired, FileNotFoundError, Exception):
+        pass
+
+    return status
+
+
+class Neo4jStatusChecker:
+    """Check Neo4j database connection and status."""
+
+    def __init__(self):
+        """Initialize Neo4j status checker with connection parameters."""
+        self.url = "bolt://localhost:7687"
+        self.username = "neo4j"
+        self.password = "password123"
+        self.graph = None
+
+    def check_connection(self) -> Dict[str, Any]:
+        """Check if Neo4j is accessible."""
+        result = {
+            'connected': False,
+            'uri': self.url,
+            'version': 'unknown'
+        }
+
+        try:
+            # Attempt to connect
+            self.graph = Neo4jGraph(
+                url=self.url,
+                username=self.username,
+                password=self.password
+            )
+
+            # Try to get version
+            try:
+                version_result = self.graph.query("CALL dbms.components() YIELD versions RETURN versions[0] as version")
+                if version_result and len(version_result) > 0:
+                    result['version'] = version_result[0].get('version', 'unknown')
+            except Exception:
+                result['version'] = 'connected'
+
+            result['connected'] = True
+
+        except Exception as e:
+            logger.debug(f"Connection failed: {e}")
+
+        return result
+
+    def get_database_stats(self) -> Dict[str, Any]:
+        """Get database statistics."""
+        stats = {
+            'total_nodes': 0,
+            'total_relationships': 0,
+            'node_types': {},
+            'programmers': 0,
+            'last_update': None
+        }
+
+        if not self.graph:
+            if not self.check_connection()['connected']:
+                return {'error': 'Not connected to Neo4j'}
+
+        try:
+            # Get total nodes
+            result = self.graph.query("MATCH (n) RETURN count(n) as count")
+            if result:
+                stats['total_nodes'] = result[0].get('count', 0)
+
+            # Get total relationships
+            result = self.graph.query("MATCH ()-[r]->() RETURN count(r) as count")
+            if result:
+                stats['total_relationships'] = result[0].get('count', 0)
+
+            # Get node types and counts
+            result = self.graph.query("""
+                MATCH (n)
+                UNWIND labels(n) as label
+                RETURN label, count(*) as count
+                ORDER BY count DESC
+            """)
+            if result:
+                for row in result:
+                    label = row.get('label')
+                    count = row.get('count', 0)
+                    if label:
+                        stats['node_types'][label] = count
+
+            # Get programmer count (Person nodes)
+            result = self.graph.query("MATCH (p:Person) RETURN count(p) as count")
+            if result:
+                stats['programmers'] = result[0].get('count', 0)
+
+        except Exception as e:
+            logger.debug(f"Error getting stats: {e}")
+            return {'error': str(e)}
+
+        return stats
+
+    def check_data_integrity(self) -> Dict[str, Any]:
+        """Check data integrity and quality."""
+        integrity = {
+            'issues': [],
+            'warnings': []
+        }
+
+        if not self.graph:
+            if not self.check_connection()['connected']:
+                return integrity
+
+        try:
+            # Check for orphaned nodes (nodes with no relationships)
+            result = self.graph.query("""
+                MATCH (n)
+                WHERE NOT (n)-[]-()
+                RETURN count(n) as orphaned_count
+            """)
+            if result and result[0].get('orphaned_count', 0) > 0:
+                integrity['warnings'].append(
+                    f"{result[0]['orphaned_count']} orphaned nodes (no relationships)"
+                )
+
+            # Check for Person nodes without skills
+            result = self.graph.query("""
+                MATCH (p:Person)
+                WHERE NOT (p)-[:HAS_SKILL]->()
+                RETURN count(p) as count
+            """)
+            if result and result[0].get('count', 0) > 0:
+                integrity['warnings'].append(
+                    f"{result[0]['count']} Person nodes without skills"
+                )
+
+        except Exception as e:
+            logger.debug(f"Error checking integrity: {e}")
+
+        return integrity
+
+    def clear_database(self, confirm: bool = True) -> bool:
+        """Clear all data from the database."""
+        if not self.graph:
+            if not self.check_connection()['connected']:
+                logger.error("Cannot clear database: not connected")
+                return False
+
+        try:
+            # Delete all nodes and relationships
+            self.graph.query("MATCH (n) DETACH DELETE n")
+            logger.info("Database cleared successfully")
+            return True
+
+        except Exception as e:
+            logger.error(f"Error clearing database: {e}")
+            return False
 
 class SetupMode(Enum):
     INTERACTIVE = "interactive"
@@ -37,6 +222,7 @@ class SetupMode(Enum):
     CONTINUE = "continue"
     CHECK = "check"
     LEARNING = "learning"
+    INIT = "init"
 
 class GraphRAGSetup:
     """Main setup class for GraphRAG educational system."""
@@ -64,6 +250,9 @@ class GraphRAGSetup:
         if self.mode == SetupMode.CHECK:
             self.display_status_report(status)
             return True
+
+        elif self.mode == SetupMode.INIT:
+            return self.setup_init(status)
 
         elif self.mode == SetupMode.FRESH:
             return self.setup_fresh(status)
@@ -361,6 +550,70 @@ class GraphRAGSetup:
             self.show_next_steps(status)
             return True
 
+    def setup_init(self, status: Dict[str, Any]) -> bool:
+        """Initialize Neo4j and project structure only."""
+        print("\n🔧 Initializing environment...")
+
+        if self.learning_mode:
+            print("\n📚 What's happening:")
+            print("  1. Starting Neo4j server if not running")
+            print("  2. Creating project directory structure")
+            print("  3. Database will remain empty for manual data population")
+
+        # Check if Neo4j is running, start if not
+        if not status['connection']['connected']:
+            print("\n🚀 Starting Neo4j server...")
+            docker_status = check_docker_neo4j()
+
+            if docker_status['neo4j_container'] and docker_status['container_status'] != 'Up':
+                # Start existing container
+                self.start_neo4j_container()
+                print("⏳ Waiting for Neo4j to be ready...")
+                time.sleep(5)
+            elif not docker_status['neo4j_container']:
+                # Set up new container
+                if not self.setup_neo4j_docker():
+                    print("❌ Failed to start Neo4j")
+                    return False
+
+            # Verify connection
+            connection_status = self.neo4j_checker.check_connection()
+            if not connection_status['connected']:
+                print("❌ Could not establish Neo4j connection")
+                self.show_docker_troubleshooting()
+                return False
+
+        # Create project directories
+        print("\n📁 Creating project structure...")
+        self.create_project_structure()
+
+        # Print Neo4j server addresses
+        print("\n🌐 Neo4j Server Active:")
+        print("  📊 Neo4j Browser: http://localhost:7474")
+        print("  🔌 Bolt Protocol:  bolt://localhost:7687")
+        print("  👤 Username: neo4j")
+        print("  🔑 Password: password123")
+
+        # Show current database status
+        print("\n📊 Current Database Status:")
+        if status['has_data']:
+            print(f"  ⚠️  Database contains {status['stats'].get('total_nodes', 0)} nodes")
+            print("  💡 Use --fresh to clear and rebuild, or --continue to use existing data")
+        else:
+            print("  ✓ Database is empty and ready")
+
+        # Show next steps
+        print("\n🎯 Next Steps:")
+        print("  1. Generate sample CVs:")
+        print("     uv run 1_generate_data.py")
+        print("  2. Build knowledge graph:")
+        print("     uv run 2_data_to_knowledge_graph.py")
+        print("  3. Query the graph:")
+        print("     uv run 3_query_knowledge_graph.py")
+        print("\n✅ Initialization complete!")
+
+        return True
+
     def run_script(self, script_name: str) -> bool:
         """Run a Python script and report results."""
         try:
@@ -569,6 +822,7 @@ def parse_arguments():
         epilog="""
 Examples:
   python 0_setup.py                # Interactive mode
+  python 0_setup.py --init          # Initialize Neo4j and directories only
   python 0_setup.py --fresh         # Fresh installation
   python 0_setup.py --continue      # Use existing data
   python 0_setup.py --check         # Check status only
@@ -576,6 +830,8 @@ Examples:
         """
     )
 
+    parser.add_argument('--init', action='store_true',
+                       help='Initialize Neo4j and project structure only')
     parser.add_argument('--fresh', action='store_true',
                        help='Force fresh setup (clears existing data)')
     parser.add_argument('--continue', action='store_true', dest='continue_mode',
@@ -588,7 +844,9 @@ Examples:
     args = parser.parse_args()
 
     # Determine mode
-    if args.fresh:
+    if args.init:
+        mode = SetupMode.INIT
+    elif args.fresh:
         mode = SetupMode.FRESH
     elif args.continue_mode:
         mode = SetupMode.CONTINUE

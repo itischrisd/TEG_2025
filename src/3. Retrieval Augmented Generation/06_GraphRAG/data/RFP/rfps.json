@@ -1,33 +1,18 @@
 [
   {
     "id": "RFP-001",
-    "title": "Enterprise Web Application Development",
-    "client": "Global Finance Corp",
-    "description": "Seeking experienced development team for devops automation",
-    "project_type": "Machine Learning Implementation",
-    "duration_months": 20,
+    "title": "API Integration Platform Development",
+    "client": "MedTech Industries",
+    "description": "Seeking experienced development team for mobile app development",
+    "project_type": "Mobile App Development",
+    "duration_months": 19,
     "team_size": 9,
     "budget_range": "$500K - $1M",
-    "start_date": "2025-09-28",
+    "start_date": "2025-10-04",
     "requirements": [
       {
-        "skill_name": "Python",
-        "min_proficiency": "Intermediate",
-        "is_mandatory": true,
-        "preferred_certifications": [
-          "Google Cloud Professional",
-          "Certified Kubernetes Administrator"
-        ]
-      },
-      {
-        "skill_name": "MongoDB",
+        "skill_name": "Node.js",
         "min_proficiency": "Expert",
-        "is_mandatory": true,
-        "preferred_certifications": []
-      },
-      {
-        "skill_name": "Java",
-        "min_proficiency": "Advanced",
         "is_mandatory": true,
         "preferred_certifications": []
       },
@@ -35,135 +20,152 @@
         "skill_name": "Microservices",
         "min_proficiency": "Expert",
         "is_mandatory": true,
-        "preferred_certifications": [
-          "Google Cloud Professional",
-          "Certified Kubernetes Administrator"
-        ]
-      },
-      {
-        "skill_name": "React",
-        "min_proficiency": "Advanced",
-        "is_mandatory": false,
-        "preferred_certifications": [
-          "Google Cloud Professional"
-        ]
-      },
-      {
-        "skill_name": "Django",
-        "min_proficiency": "Intermediate",
-        "is_mandatory": false,
-        "preferred_certifications": [
-          "Certified Kubernetes Administrator",
-          "Google Cloud Professional"
-        ]
-      },
-      {
-        "skill_name": "TypeScript",
-        "min_proficiency": "Advanced",
-        "is_mandatory": true,
-        "preferred_certifications": [
-          "Google Cloud Professional"
-        ]
-      },
-      {
-        "skill_name": "AWS",
-        "min_proficiency": "Advanced",
-        "is_mandatory": false,
-        "preferred_certifications": [
-          "AWS Certified Solutions Architect",
-          "Google Cloud Professional"
-        ]
-      }
-    ],
-    "location": "North Kathryn",
-    "remote_allowed": true
-  },
-  {
-    "id": "RFP-002",
-    "title": "API Integration Platform Development",
-    "client": "Global Finance Corp",
-    "description": "Seeking experienced development team for devops automation",
-    "project_type": "E-commerce Modernization",
-    "duration_months": 14,
-    "team_size": 10,
-    "budget_range": "$250K - $500K",
-    "start_date": "2025-09-28",
-    "requirements": [
-      {
-        "skill_name": "DevOps",
-        "min_proficiency": "Intermediate",
-        "is_mandatory": false,
-        "preferred_certifications": [
-          "Google Cloud Professional"
-        ]
-      },
-      {
-        "skill_name": "Docker",
-        "min_proficiency": "Advanced",
-        "is_mandatory": true,
         "preferred_certifications": []
       },
       {
-        "skill_name": "Django",
-        "min_proficiency": "Advanced",
+        "skill_name": "React",
+        "min_proficiency": "Expert",
         "is_mandatory": true,
         "preferred_certifications": [
           "AWS Certified Solutions Architect"
         ]
       },
       {
-        "skill_name": "Kubernetes",
-        "min_proficiency": "Intermediate",
+        "skill_name": "Machine Learning",
+        "min_proficiency": "Advanced",
         "is_mandatory": false,
-        "preferred_certifications": []
+        "preferred_certifications": [
+          "AWS Certified Solutions Architect",
+          "Certified Kubernetes Administrator"
+        ]
       },
       {
-        "skill_name": "PostgreSQL",
+        "skill_name": "Python",
+        "min_proficiency": "Advanced",
+        "is_mandatory": true,
+        "preferred_certifications": [
+          "Certified Kubernetes Administrator"
+        ]
+      },
+      {
+        "skill_name": "JavaScript",
         "min_proficiency": "Intermediate",
         "is_mandatory": true,
         "preferred_certifications": [
-          "Google Cloud Professional",
+          "AWS Certified Solutions Architect",
           "Certified Kubernetes Administrator"
+        ]
+      },
+      {
+        "skill_name": "Django",
+        "min_proficiency": "Intermediate",
+        "is_mandatory": false,
+        "preferred_certifications": [
+          "Certified Kubernetes Administrator"
+        ]
+      },
+      {
+        "skill_name": "PostgreSQL",
+        "min_proficiency": "Expert",
+        "is_mandatory": true,
+        "preferred_certifications": [
+          "AWS Certified Solutions Architect"
         ]
       }
     ],
-    "location": "Port Kevin",
-    "remote_allowed": false
+    "location": "Douglasfort",
+    "remote_allowed": true
   },
   {
-    "id": "RFP-003",
-    "title": "Security Enhancement Development",
-    "client": "Retail Solutions Ltd",
+    "id": "RFP-002",
+    "title": "Machine Learning Implementation Development",
+    "client": "MedTech Industries",
     "description": "Seeking experienced development team for api integration platform",
-    "project_type": "Data Analytics Platform",
-    "duration_months": 20,
-    "team_size": 9,
-    "budget_range": "$500K - $1M",
-    "start_date": "2025-09-28",
+    "project_type": "Cloud Migration Project",
+    "duration_months": 19,
+    "team_size": 12,
+    "budget_range": "$100K - $250K",
+    "start_date": "2025-10-04",
     "requirements": [
       {
-        "skill_name": "DevOps",
+        "skill_name": "Node.js",
         "min_proficiency": "Advanced",
         "is_mandatory": true,
         "preferred_certifications": []
       },
       {
-        "skill_name": "Django",
+        "skill_name": "MongoDB",
         "min_proficiency": "Intermediate",
+        "is_mandatory": false,
+        "preferred_certifications": [
+          "AWS Certified Solutions Architect"
+        ]
+      },
+      {
+        "skill_name": "Python",
+        "min_proficiency": "Intermediate",
+        "is_mandatory": true,
+        "preferred_certifications": [
+          "AWS Certified Solutions Architect",
+          "Certified Kubernetes Administrator"
+        ]
+      },
+      {
+        "skill_name": "AWS",
+        "min_proficiency": "Intermediate",
+        "is_mandatory": false,
+        "preferred_certifications": [
+          "AWS Certified Solutions Architect",
+          "Google Cloud Professional"
+        ]
+      },
+      {
+        "skill_name": "PostgreSQL",
+        "min_proficiency": "Advanced",
+        "is_mandatory": false,
+        "preferred_certifications": []
+      }
+    ],
+    "location": "East Alicia",
+    "remote_allowed": true
+  },
+  {
+    "id": "RFP-003",
+    "title": "Cloud Migration Project Development",
+    "client": "MedTech Industries",
+    "description": "Seeking experienced development team for e-commerce modernization",
+    "project_type": "Security Enhancement",
+    "duration_months": 14,
+    "team_size": 10,
+    "budget_range": "$1M - $2M",
+    "start_date": "2025-10-04",
+    "requirements": [
+      {
+        "skill_name": "Java",
+        "min_proficiency": "Expert",
+        "is_mandatory": true,
+        "preferred_certifications": [
+          "Google Cloud Professional",
+          "Certified Kubernetes Administrator"
+        ]
+      },
+      {
+        "skill_name": "Node.js",
+        "min_proficiency": "Intermediate",
+        "is_mandatory": false,
+        "preferred_certifications": [
+          "Certified Kubernetes Administrator"
+        ]
+      },
+      {
+        "skill_name": "AWS",
+        "min_proficiency": "Advanced",
         "is_mandatory": true,
         "preferred_certifications": []
       },
       {
         "skill_name": "PostgreSQL",
-        "min_proficiency": "Intermediate",
-        "is_mandatory": false,
-        "preferred_certifications": [
-          "Google Cloud Professional"
-        ]
-      },
-      {
-        "skill_name": "Kubernetes",
-        "min_proficiency": "Intermediate",
+        "min_proficiency": "Expert",
         "is_mandatory": false,
         "preferred_certifications": []
       },
@@ -174,8 +176,17 @@
         "preferred_certifications": []
       },
       {
-        "skill_name": "JavaScript",
-        "min_proficiency": "Intermediate",
+        "skill_name": "TypeScript",
+        "min_proficiency": "Advanced",
+        "is_mandatory": false,
+        "preferred_certifications": [
+          "Google Cloud Professional",
+          "AWS Certified Solutions Architect"
+        ]
+      },
+      {
+        "skill_name": "Docker",
+        "min_proficiency": "Advanced",
         "is_mandatory": true,
         "preferred_certifications": [
           "Certified Kubernetes Administrator",
@@ -183,7 +194,7 @@
         ]
       }
     ],
-    "location": "South Patricia",
+    "location": "Michaelside",
     "remote_allowed": false
   }
 ]

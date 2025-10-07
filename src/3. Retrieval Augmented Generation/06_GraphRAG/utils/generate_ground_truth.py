@@ -3,9 +3,14 @@
 Ground Truth Generator for GraphRAG vs Naive RAG Comparison
 ==========================================================
 
-Uses GPT-5 with full CV context to generate authoritative answers
+Uses GPT-4.1 with full CV context to generate authoritative answers
 for test questions. This provides an independent, unbiased ground truth
 for evaluating both GraphRAG and Naive RAG systems.
+
+Configuration:
+- Processes all 30 CVs by default (change max_cvs in __init__ to limit)
+- Processes all 42 questions by default (pass max_questions to generate_all_ground_truths to limit)
+- Includes detailed timing diagnostics
 """
 
 from dotenv import load_dotenv
@@ -28,11 +33,11 @@ logger = logging.getLogger(__name__)
 class GroundTruthGenerator:
     """Generate ground truth answers using GPT-5 with full CV context."""
 
-    def __init__(self):
+    def __init__(self, max_cvs: int = 30):
         """Initialize the ground truth generator."""
-        # Use GPT-5 for superior reasoning with large context
+        # Use GPT-4.1 for performance comparison
         self.llm = ChatOpenAI(
-            model="gpt-5",
+            model="gpt-4.1",
             max_tokens=4096,
             api_key=os.getenv("OPENAI_API_KEY")
         )
@@ -42,7 +47,10 @@ class GroundTruthGenerator:
         self.results_dir = Path("results")
         self.results_dir.mkdir(exist_ok=True)
 
-        logger.info("✓ GPT-5 Ground Truth Generator initialized")
+        # Limit number of CVs for testing
+        self.max_cvs = max_cvs
+
+        logger.info(f"✓ GPT-4.1 Ground Truth Generator initialized (using {max_cvs} CVs)")
 
     def load_all_cvs(self) -> List[str]:
         """Load all CV PDFs and extract text content."""
@@ -52,9 +60,11 @@ class GroundTruthGenerator:
         if not cv_files:
             raise FileNotFoundError(f"No PDF files found in {self.data_dir}")
 
+        # Limit to max_cvs
+        cv_files = sorted(cv_files)[:self.max_cvs]
         logger.info(f"Loading {len(cv_files)} CV files...")
 
-        for cv_file in sorted(cv_files):
+        for cv_file in cv_files:
             try:
                 loader = PyPDFLoader(str(cv_file))
                 documents = loader.load()
@@ -78,26 +88,22 @@ You have been given ALL {num_cvs} CVs from our candidate database to review comp
 Your task is to answer the following question with ABSOLUTE PRECISION and COMPLETENESS based on the CVs provided.
 
 CRITICAL INSTRUCTIONS:
-- For counting questions: Provide the exact number, count carefully
-- For listing questions: Include ALL matches, not just examples or samples
-- For aggregation questions: Calculate the actual numerical result (average, sum, max, etc.)
-- For filtering questions: Apply all criteria strictly and list every match
-- For ranking questions: Sort properly and provide the exact ranking
+- Provide ONLY the direct answer, no explanations or reasoning
+- For counting questions: Give only the number (e.g., "3" or "Zero")
+- For listing questions: List only the names, comma-separated
+- For aggregation questions: Give only the calculated result
+- For filtering questions: List only the matching names, comma-separated
+- For ranking questions: List names in order, comma-separated
 - Be specific with names, skills, companies, and other details
-- If something cannot be determined from the CVs, state that clearly
-- Show your reasoning step-by-step before giving the final answer
+- If no matches: answer "None" or "Zero" as appropriate
+- MAXIMUM 1-2 sentences, be extremely concise
 
 CVs Database ({num_cvs} total CVs):
 {context}
 
 Question: {question}
 
-Step-by-step analysis:
-1. [Identify relevant information from CVs]
-2. [Apply the query logic/calculation]
-3. [Verify completeness and accuracy]
-
-Final Answer:"""
+Answer (concise, direct):"""
 
         return PromptTemplate(
             input_variables=["num_cvs", "context", "question"],
@@ -106,13 +112,18 @@ Final Answer:"""
 
     async def generate_ground_truth_for_question(self, question: str, all_cv_texts: List[str]) -> Dict[str, Any]:
         """Generate ground truth answer for a single question."""
+        import time
+        start_time = time.time()
+
         try:
             # Combine all CVs into context
+            context_build_start = time.time()
             full_context = "\n\n" + "="*80 + "\n\n".join(all_cv_texts)
+            context_build_time = time.time() - context_build_start
 
             # Check context size (rough estimate)
             context_tokens = len(full_context.split()) * 1.3  # Rough token estimate
-            logger.info(f"Context size: ~{context_tokens:,.0f} tokens for question: {question[:50]}...")
+            logger.info(f"Context size: ~{context_tokens:,.0f} tokens (built in {context_build_time:.2f}s)")
 
             if context_tokens > 300000:  # Conservative limit for GPT-5
                 logger.warning(f"Context size may be large: {context_tokens:,.0f} tokens")
@@ -126,32 +137,40 @@ Final Answer:"""
             )
 
             # Generate answer with GPT-5
-            logger.info(f"Generating ground truth for: {question}")
+            logger.info(f"Calling API for: {question[:60]}...")
+            api_start = time.time()
             response = await self.llm.ainvoke(prompt)
+            api_time = time.time() - api_start
 
             ground_truth_answer = response.content.strip()
 
-            logger.info(f"✓ Generated ground truth ({len(ground_truth_answer)} chars)")
+            total_time = time.time() - start_time
+            logger.info(f"✓ Generated in {total_time:.2f}s (API: {api_time:.2f}s, {len(ground_truth_answer)} chars)")
 
             return {
                 "question": question,
                 "ground_truth_answer": ground_truth_answer,
                 "context_tokens_estimate": int(context_tokens),
                 "num_cvs_used": len(all_cv_texts),
-                "model_used": "gpt-5",
-                "status": "success"
+                "model_used": "gpt-4.1",
+                "status": "success",
+                "generation_time_seconds": total_time,
+                "api_time_seconds": api_time
             }
 
         except Exception as e:
+            total_time = time.time() - start_time
             logger.error(f"Error generating ground truth for '{question}': {e}")
+
             return {
                 "question": question,
                 "ground_truth_answer": f"ERROR: {str(e)}",
                 "context_tokens_estimate": 0,
                 "num_cvs_used": len(all_cv_texts),
-                "model_used": "gpt-5",
+                "model_used": "gpt-4.1",
                 "status": "error",
-                "error": str(e)
+                "error": str(e),
+                "generation_time_seconds": total_time
             }
 
     def load_test_questions(self) -> Dict[str, Any]:
@@ -163,7 +182,7 @@ Final Answer:"""
         with open(questions_file, 'r') as f:
             return json.load(f)
 
-    async def generate_all_ground_truths(self) -> Dict[str, Any]:
+    async def generate_all_ground_truths(self, max_questions: int = None) -> Dict[str, Any]:
         """Generate ground truth answers for all test questions."""
         # Load CVs and questions
         all_cv_texts = self.load_all_cvs()
@@ -179,7 +198,12 @@ Final Answer:"""
                     "description": category_data["description"]
                 })
 
-        logger.info(f"Generating ground truth for {len(all_questions)} questions...")
+        # Limit number of questions if specified
+        if max_questions:
+            all_questions = all_questions[:max_questions]
+            logger.info(f"Generating ground truth for {len(all_questions)} questions (limited from {len(all_questions)} total)")
+        else:
+            logger.info(f"Generating ground truth for all {len(all_questions)} questions...")
 
         # Generate ground truth for each question
         results = []
@@ -204,7 +228,7 @@ Final Answer:"""
         ground_truth_data = {
             "metadata": {
                 "generated_by": "GroundTruthGenerator",
-                "model": "gpt-5",
+                "model": "gpt-4.1",
                 "num_questions": len(results),
                 "num_cvs": len(all_cv_texts),
                 "cv_source_dir": str(self.data_dir),
@@ -240,6 +264,19 @@ Final Answer:"""
         print(f"CVs Analyzed: {metadata['num_cvs']}")
         print(f"Successful: {metadata['total_successful']}")
         print(f"Errors: {metadata['total_errors']}")
+
+        # DIAGNOSTIC: Show timing statistics
+        successful_results = [r for r in results if r["status"] == "success" and "generation_time_seconds" in r]
+        if successful_results:
+            total_time = sum(r["generation_time_seconds"] for r in successful_results)
+            avg_time = total_time / len(successful_results)
+            api_times = [r.get("api_time_seconds", 0) for r in successful_results]
+            avg_api_time = sum(api_times) / len(api_times) if api_times else 0
+
+            print(f"\n⏱️  TIMING DIAGNOSTICS:")
+            print(f"Total generation time: {total_time:.2f}s ({total_time/60:.2f} minutes)")
+            print(f"Average per question: {avg_time:.2f}s")
+            print(f"Average API time: {avg_api_time:.2f}s")
 
         # Show category breakdown
         print(f"\nQuestions by Category:")

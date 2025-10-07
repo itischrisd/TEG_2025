@@ -17,6 +17,7 @@ from glob import glob
 from typing import List
 import logging
 from pathlib import Path
+import toml
 
 from unstructured.partition.pdf import partition_pdf
 from langchain_core.documents import Document
@@ -32,10 +33,21 @@ logger = logging.getLogger(__name__)
 class DataKnowledgeGraphBuilder:
     """Builds knowledge graph from PDFs and JSONs using LangChain's LLMGraphTransformer."""
 
-    def __init__(self):
+    def __init__(self, config_path: str = "utils/config.toml"):
         """Initialize the data knowledge graph builder."""
+        self.config = self._load_config(config_path)
         self.setup_neo4j()
         self.setup_llm_transformer()
+
+    def _load_config(self, config_path: str) -> dict:
+        """Load configuration from TOML file."""
+        if not os.path.exists(config_path):
+            raise ValueError(f"Configuration file not found: {config_path}")
+
+        with open(config_path, 'r') as f:
+            config = toml.load(f)
+
+        return config
 
     def setup_neo4j(self):
         """Setup Neo4j connection."""
@@ -211,15 +223,19 @@ class DataKnowledgeGraphBuilder:
             logger.error(f"Failed to convert {pdf_path} to graph: {e}")
             return []
 
-    async def process_all_cvs(self, cv_directory: str = "data/programmers") -> int:
+    async def process_all_cvs(self, cv_directory: str = None) -> int:
         """Process all PDF CVs in the directory.
 
         Args:
-            cv_directory: Directory containing PDF CVs
+            cv_directory: Directory containing PDF CVs (defaults to config value)
 
         Returns:
             int: Number of successfully processed CVs
         """
+        # Use config directory if not specified
+        if cv_directory is None:
+            cv_directory = self.config['output']['programmers_dir']
+
         # Find all PDF files
         pdf_pattern = os.path.join(cv_directory, "*.pdf")
         pdf_files = glob(pdf_pattern)

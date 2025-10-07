@@ -2,6 +2,8 @@ from dotenv import load_dotenv
 load_dotenv(override=True)
 
 import os
+import json
+from pathlib import Path
 from langchain_community.document_loaders import DirectoryLoader
 from langchain_openai import ChatOpenAI, OpenAIEmbeddings
 from langchain_core.vectorstores import InMemoryVectorStore
@@ -92,7 +94,23 @@ questions = [
     "What was Ada Lovelace's contribution to computing?"
 ]
 
-ground_truths = generate_ground_truths(questions, data_dir, expert_llm)
+output_dir = Path("data")
+output_file = output_dir / "ground_truth_dataset.json"
+
+if output_file.exists():
+    print(f"Loading existing ground truth dataset from {output_file}")
+    with open(output_file, "r") as f:
+        ground_truth_data = json.load(f)
+    ground_truths = [item["ground_truth"] for item in ground_truth_data]
+else:
+    print("Generating ground truth answers using expert LLM...")
+    ground_truths = generate_ground_truths(questions, data_dir, expert_llm)
+
+    output_dir.mkdir(exist_ok=True)
+    ground_truth_data = [{"question": q, "ground_truth": gt} for q, gt in zip(questions, ground_truths)]
+    with open(output_file, "w") as f:
+        json.dump(ground_truth_data, f, indent=2)
+    print(f"Ground truth dataset saved to {output_file}")
 
 samples = []
 for q, gt in zip(questions, ground_truths):
