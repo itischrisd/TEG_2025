@@ -2,104 +2,117 @@
 
 A comprehensive course on Generative AI—from foundational concepts to advanced implementations with RAG, agents, and workflows.
 
-[YouTube Playlist](https://www.youtube.com/playlist?list=PLOiItT5FLNRqp8sK9t-Hi2xRjZgg1SE44)
+<a href="https://www.youtube.com/playlist?list=PLOiItT5FLNRqp8sK9t-Hi2xRjZgg1SE44" target="_blank">YouTube Playlist</a>
 
 ---
 
 ## 📚 Course Materials
 
 ### 1. Introduction
-**Lectures:** 
-- [Course Introduction (03:33)](https://www.youtube.com/watch?v=46FcfsccTyk)
-- [How GenAI Works? (26:38)](https://youtu.be/q-As4OK1f5E)
+**Lectures:**
+- <a href="https://www.youtube.com/watch?v=46FcfsccTyk" target="_blank">Course Introduction (03:33)</a>
+- <a href="https://youtu.be/q-As4OK1f5E" target="_blank">How GenAI Works? (26:38)</a>
 
 **Demo**:
 
-- [First Interaction with the LLM (20:53)](https://youtu.be/xwz0UPodgHY)
-- [Your First Chatbot App (06:10)](https://youtu.be/C9ireExNgvU?si=3vRY_Sv43WGmaa8a)
+- <a href="https://youtu.be/xwz0UPodgHY" target="_blank">First Interaction with the LLM (20:53)</a>
+- <a href="https://youtu.be/C9ireExNgvU?si=3vRY_Sv43WGmaa8a" target="_blank">Your First Chatbot App (06:10)</a>
 
-**Slides:** [slides/1. Intro](https://github.com/wodecki/TEG_2025/blob/main/slides/1.%20Intro)
+**Slides:** <a href="https://github.com/wodecki/TEG_2025/blob/main/slides/1.%20Intro" target="_blank">slides/1. Intro</a>
 
-**Code:** [src/1. Intro](https://github.com/wodecki/TEG_2025/tree/main/src/1.%20Intro)
+**Code:** <a href="https://github.com/wodecki/TEG_2025/tree/main/src/1.%20Intro" target="_blank">src/1. Intro</a>
 
 ---
 
 ### 2. Tokenization, Embeddings, and Transformers
-**Lectures:** 
-- [Tokenization (6:14)](https://youtu.be/mltPLwiCPZM)
-- [Embeddings (23:54)](https://youtu.be/P2DnCGjcukA)
-- [Transformers - attention (49:36)](https://youtu.be/8iarkQsyzbw)
-- [Transformers - Multi-Layer Perceptron (15:38)](https://youtu.be/hpQcTglAByo)
-- [Transformers - Prediction (13:55)](https://youtu.be/4pRkJuKTaR0)
+**Lectures:**
+- <a href="https://youtu.be/mltPLwiCPZM" target="_blank">Tokenization (6:14)</a>
+- <a href="https://youtu.be/P2DnCGjcukA" target="_blank">Embeddings (23:54)</a>
+- <a href="https://youtu.be/8iarkQsyzbw" target="_blank">Transformers - attention (49:36)</a>
+- <a href="https://youtu.be/hpQcTglAByo" target="_blank">Transformers - Multi-Layer Perceptron (15:38)</a>
+- <a href="https://youtu.be/4pRkJuKTaR0" target="_blank">Transformers - Prediction (13:55)</a>
 
 **Demo:**
-- [Embeddings (17:38)](https://youtu.be/zkfbIZlD89M)
+- <a href="https://youtu.be/zkfbIZlD89M" target="_blank">Embeddings (17:38)</a>
 
-**Slides:** [slides/2. Transformers](https://github.com/wodecki/TEG_2025/blob/main/slides/2.%20Transformers)
+**Slides:** <a href="https://github.com/wodecki/TEG_2025/blob/main/slides/2.%20Transformers" target="_blank">slides/2. Transformers</a>
 
-**Code:** [src/2. Models](https://github.com/wodecki/TEG_2025/tree/main/src/2.%20Models)
+**Code:** <a href="https://github.com/wodecki/TEG_2025/tree/main/src/2.%20Models" target="_blank">src/2. Models</a>
 
 ---
 
 ### 3. Retrieval Augmented Generation (RAG)
-**Lectures:** 
-- [RAG - foundations (21:41)](https://youtu.be/xtctSETgUgM)
-- [RAG - evaluation (17:59)](https://youtu.be/MiTLJKbO1Q8)
+**Lectures:**
+- <a href="https://youtu.be/xtctSETgUgM" target="_blank">RAG - foundations (21:41)</a>
+- <a href="https://youtu.be/MiTLJKbO1Q8" target="_blank">RAG - evaluation (17:59)</a>
 
-**Demo:** 
-- [Minimal RAG (20:41)](https://youtu.be/mJdh5C5yhRg)
-- [Chunking (9:14)](https://youtu.be/t_aAjH8Tbjg)
-- [Vector Stores (16:37)](https://youtu.be/YtbxYn9aaok)
-- [Document Loaders (19:54)](https://youtu.be/clxfF71jGH0)
-- [Advanced RAG Techniques (32:35)](https://youtu.be/Z5vBluV6RXw)
-- [RAG Evaluation with RAGAS (21:27)](https://youtu.be/SwswpFpreqU)
-- [GraphRAG with Neo4j - Part 1 (22:43)](https://youtu.be/tVOImldmChk)
-- [GraphRAG with Neo4j - Part 2 (6:17)](https://youtu.be/R62QnvCqeM0)
-- [GraphRAG with Neo4j - Part 3 (11:53)](https://youtu.be/xM-u56TalOQ)
+**Demo:**
+- <a href="https://youtu.be/mJdh5C5yhRg" target="_blank">Minimal RAG (20:41)</a>
+- <a href="https://youtu.be/t_aAjH8Tbjg" target="_blank">Chunking (9:14)</a>
+- <a href="https://youtu.be/YtbxYn9aaok" target="_blank">Vector Stores (16:37)</a>
+- <a href="https://youtu.be/clxfF71jGH0" target="_blank">Document Loaders (19:54)</a>
+- <a href="https://youtu.be/Z5vBluV6RXw" target="_blank">Advanced RAG Techniques (32:35)</a>
+- <a href="https://youtu.be/SwswpFpreqU" target="_blank">RAG Evaluation with RAGAS (21:27)</a>
+- <a href="https://youtu.be/tVOImldmChk" target="_blank">GraphRAG with Neo4j - Part 1 (22:43)</a>
+- <a href="https://youtu.be/R62QnvCqeM0" target="_blank">GraphRAG with Neo4j - Part 2 (6:17)</a>
+- <a href="https://youtu.be/xM-u56TalOQ" target="_blank">GraphRAG with Neo4j - Part 3 (11:53)</a>
 
-**Slides:** [slides/3. Retrieval Augmented Generation](https://github.com/wodecki/TEG_2025/blob/main/slides/3.%20Retrieval%20Augmented%20Generation)
+**Slides:** <a href="https://github.com/wodecki/TEG_2025/blob/main/slides/3.%20Retrieval%20Augmented%20Generation" target="_blank">slides/3. Retrieval Augmented Generation</a>
 
-**Code:** [src/3. Retrieval Augmented Generation](https://github.com/wodecki/TEG_2025/tree/main/src/3.%20Retrieval%20Augmented%20Generation)
+**Code:** <a href="https://github.com/wodecki/TEG_2025/tree/main/src/3.%20Retrieval%20Augmented%20Generation" target="_blank">src/3. Retrieval Augmented Generation</a>
 
 ---
 
 ### 4. Graphs
 **Lectures:**
-- [Chains and Graphs (37:15)](https://youtu.be/MKMycsxvEpI)
+- <a href="https://youtu.be/MKMycsxvEpI" target="_blank">Chains and Graphs (37:15)</a>
 
-**Demo:** [Placeholder - Will appear here soon]
+**Demo:**
+- <a href="https://youtu.be/60xH5NRZcQ0" target="_blank">Basig Graph (13:34)</a>
+- <a href="https://youtu.be/qUSoNGCMVXw" target="_blank">Parallel Processing (13:10)</a>
+- <a href="https://youtu.be/fc0EfMK0ppg" target="_blank">Map Reduce (09:53)</a>
 
-**Slides:** [slides/4. Graphs](https://github.com/wodecki/TEG_2025/blob/main/slides/4.%20Graphs)
+**Slides:** <a href="https://github.com/wodecki/TEG_2025/blob/main/slides/4.%20Graphs" target="_blank">slides/4. Graphs</a>
 
-**Code:** [src/4. Graphs](https://github.com/wodecki/TEG_2025/tree/main/src/4.%20Graphs)
+**Code:** <a href="https://github.com/wodecki/TEG_2025/tree/main/src/4.%20Graphs" target="_blank">src/4. Graphs</a>
 
 ---
 
 ### 5. Tools and Agents
-**Lectures:** 
-- [Tools and Agents (21:41)](https://youtu.be/p3vluBH5hww)
-- [Functions, LLMs, and Agents - a wider picture (16:54)](https://youtu.be/m2J5H27u2is)
-- [Multi-Agent Architectures (18:57)](https://youtu.be/6kJqOPFMmA0)
-- [Agentic AI Evaluation (17:21)](https://youtu.be/VkDY4Zh6Cac)
+**Lectures:**
+- <a href="https://youtu.be/p3vluBH5hww" target="_blank">Tools and Agents (21:41)</a>
+- <a href="https://youtu.be/m2J5H27u2is" target="_blank">Functions, LLMs, and Agents - a wider picture (16:54)</a>
+- <a href="https://youtu.be/6kJqOPFMmA0" target="_blank">Multi-Agent Architectures (18:57)</a>
+- <a href="https://youtu.be/VkDY4Zh6Cac" target="_blank">Agentic AI Evaluation (17:21)</a>
 
-**Demo:** [Placeholder - Will appear here soon]
+**Demo:**
+- <a href="https://youtu.be/-bzhMYKQH6Y" target="_blank">OpenAI Function Calling (10:22)</a>
+- <a href="https://youtu.be/oR423M8SWuk" target="_blank">LangChain Tools (18:08)</a>
+- <a href="https://youtu.be/PfhWyEFwRLY" target="_blank">LangGraph ReAct (20:42)</a>
+- <a href="https://youtu.be/I1_i41UGPTQ" target="_blank">Complex Agent - Part 1 (12:26)</a>
+- <a href="https://youtu.be/YxufE6z6PJE" target="_blank">Complex Agent - Part 2 (12:19)</a>
+- <a href="https://youtu.be/zpLEZFddNp4" target="_blank">Multi-Agent Systems with LangGraph (14:32)</a>
+- <a href="https://youtu.be/zo86jj_1VEY" target="_blank">Research Assistan (18:43)</a>
+- <a href="https://youtu.be/dC4mJuyqnqE" target="_blank">Multi-Agents Systems with A2A (18:15)</a>
+-
 
-**Slides:** [slides/5. Tools and Agents](https://github.com/wodecki/TEG_2025/blob/main/slides/5.%20Tools%20and%20Agents)
+**Slides:** <a href="https://github.com/wodecki/TEG_2025/blob/main/slides/5.%20Tools%20and%20Agents" target="_blank">slides/5. Tools and Agents</a>
 
-**Code:** [src/5. Tools and Agents](https://github.com/wodecki/TEG_2025/tree/main/src/5.%20Tools%20and%20Agents)
+**Code:** <a href="https://github.com/wodecki/TEG_2025/tree/main/src/5.%20Tools%20and%20Agents" target="_blank">src/5. Tools and Agents</a>
 
 ---
 
 ### 6. Model Context Protocol (MCP)
 **Lectures:**
-- [Model Context Protocol - Introduction (35:50)](https://youtu.be/_eBMpvvijXI)
-- [MCP vs Agentic AI (8:40)](https://youtu.be/OsLQGOkfTr8)
+- <a href="https://youtu.be/_eBMpvvijXI" target="_blank">Model Context Protocol - Introduction (35:50)</a>
+- <a href="https://youtu.be/OsLQGOkfTr8" target="_blank">MCP vs Agentic AI (8:40)</a>
 
-**Demo:** [Placeholder - Will appear here soon]
+**Demo:**
+- <a href="https://youtu.be/7kwvodH4UVs" target="_blank">MCP (10:42)</a>
 
-**Slides:** [slides/6. MCP](https://github.com/wodecki/TEG_2025/blob/main/slides/6.%20MCP)
+**Slides:** <a href="https://github.com/wodecki/TEG_2025/blob/main/slides/6.%20MCP" target="_blank">slides/6. MCP</a>
 
-**Code:** [src/6. MCP](https://github.com/wodecki/TEG_2025/tree/main/src/6.%20MCP)
+**Code:** <a href="https://github.com/wodecki/TEG_2025/tree/main/src/6.%20MCP" target="_blank">src/6. MCP</a>
 
 ---
 
@@ -107,7 +120,7 @@ A comprehensive course on Generative AI—from foundational concepts to advanced
 
 ### Prerequisites
 - Python 3.10+ (3.11+ recommended)
-- [uv](https://github.com/astral-sh/uv) package manager
+- <a href="https://github.com/astral-sh/uv" target="_blank">uv</a> package manager
 
 ### Installation
 
