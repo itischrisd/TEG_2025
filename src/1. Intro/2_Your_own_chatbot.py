@@ -25,7 +25,7 @@ import os
 
 import streamlit as st
 from dotenv import load_dotenv
-from openai import OpenAI
+from openai import AzureOpenAI
 
 # Load environment variables from .env file
 load_dotenv(override=True)
@@ -33,12 +33,12 @@ load_dotenv(override=True)
 
 def initialize_client():
     """Initialize OpenAI client with API key from environment"""
-    api_key = os.getenv('OPENAI_API_KEY')
+    api_key = os.getenv('AZURE_OPENAI_API_KEY')
     if not api_key:
-        st.error("OPENAI_API_KEY environment variable is required")
+        st.error("AZURE_OPENAI_API_KEY environment variable is required")
         st.stop()
 
-    return OpenAI(api_key=api_key)
+    return AzureOpenAI(api_key=api_key)
 
 
 """Main Streamlit application"""
@@ -73,7 +73,7 @@ with st.sidebar:
     st.header("Settings")
     model_option = st.selectbox(
         "Choose Model:",
-        ["gpt-4o-mini", "gpt-4o", "gpt-3.5-turbo"],
+        ["gpt-4o-mini", "gpt-4o", "gpt-35-turbo"],
         index=0
     )
     st.session_state["openai_model"] = model_option
