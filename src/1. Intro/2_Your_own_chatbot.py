@@ -21,13 +21,15 @@ For public access (optional):
 4. Use the generated URL for public access
 """
 
-from dotenv import load_dotenv
 import os
-from openai import OpenAI
+
 import streamlit as st
+from dotenv import load_dotenv
+from openai import OpenAI
 
 # Load environment variables from .env file
 load_dotenv(override=True)
+
 
 def initialize_client():
     """Initialize OpenAI client with API key from environment"""
@@ -35,8 +37,9 @@ def initialize_client():
     if not api_key:
         st.error("OPENAI_API_KEY environment variable is required")
         st.stop()
-    
+
     return OpenAI(api_key=api_key)
+
 
 """Main Streamlit application"""
 
@@ -60,7 +63,7 @@ if "openai_model" not in st.session_state:
 if "messages" not in st.session_state:
     st.session_state.messages = [
         {
-            "role": "system", 
+            "role": "system",
             "content": "You are a polite academic teacher answering students' questions in a hip-hop style"
         }
     ]
@@ -74,16 +77,16 @@ with st.sidebar:
         index=0
     )
     st.session_state["openai_model"] = model_option
-    
+
     if st.button("Clear Chat History"):
         st.session_state.messages = [
             {
-                "role": "system", 
+                "role": "system",
                 "content": "You are a polite academic teacher answering students' questions in a hip-hop style"
             }
         ]
         st.rerun()
-    
+
     st.info("💡 **Tip**: This chatbot combines academic knowledge with hip-hop flair!")
 
 # Display chat messages (excluding system message)
@@ -96,11 +99,11 @@ for message in st.session_state.messages:
 if prompt := st.chat_input("Hi, what's up?"):
     # Add user message to chat history
     st.session_state.messages.append({"role": "user", "content": prompt})
-    
+
     # Display user message
     with st.chat_message("user"):
         st.markdown(prompt)
-    
+
     # Generate and display assistant response
     with st.chat_message("assistant"):
         try:
@@ -115,13 +118,13 @@ if prompt := st.chat_input("Hi, what's up?"):
                 temperature=0.7,
                 max_tokens=1000
             )
-            
+
             # Stream the response
             response = st.write_stream(stream)
-            
+
             # Add assistant response to chat history
             st.session_state.messages.append({"role": "assistant", "content": response})
-            
+
         except Exception as e:
             st.error(f"Error generating response: {e}")
             st.info("Please check your API key and try again.")

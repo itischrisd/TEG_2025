@@ -20,18 +20,19 @@ you can run, modify, and experiment with.
 """
 
 import textwrap
-from openai import OpenAI
+
 from dotenv import load_dotenv
+from openai import AzureOpenAI
 
 # Use override=True to ensure project-specific settings take precedence
 load_dotenv(override=True)
 
 # Initialize OpenAI client - this creates our connection to the LLM service
-client = OpenAI()
+client = AzureOpenAI()
 
-print("\n" + "="*60)
+print("\n" + "=" * 60)
 print("EXAMPLE 1: SYSTEM PROMPTS - THE AI'S PERSONALITY")
-print("="*60)
+print("=" * 60)
 
 """
 System prompts are special instructions that define how an AI should behave.
@@ -60,7 +61,6 @@ response = client.chat.completions.create(
 answer = response.choices[0].message.content.strip()
 print(answer)
 
-
 # Example 1: Hip-Hop Teacher
 
 system_prompt = "You are a cool teacher who explains complex topics using hip-hop slang and rhythm. Keep it educational but fun!"
@@ -83,9 +83,9 @@ print(answer)
 # e.g., "pirate teacher", "corporate consultant", "kindergarten helper", etc.
 
 
-print("\n" + "="*60)
+print("\n" + "=" * 60)
 print("EXAMPLE 2: TEMPERATURE - THE CREATIVITY DIAL")
-print("="*60)
+print("=" * 60)
 
 """
 CONCEPT: Temperature Parameter
@@ -107,8 +107,8 @@ temperatures = [0.1, 1.0, 1.5]
 
 for temp in temperatures:
     behavior = ("Focused & Predictable" if temp <= 0.3 else
-               "Balanced Creativity" if temp <= 1.0 else
-               "Highly Creative")
+                "Balanced Creativity" if temp <= 1.0 else
+                "Highly Creative")
 
     print(f"\n🌡️ Temperature: {temp} ({behavior})")
 
@@ -133,9 +133,9 @@ Choose based on your use case!
 # Hint: High temperature responses will be different each time, low won't
 """
 
-print("\n" + "="*60)
+print("\n" + "=" * 60)
 print("EXAMPLE 3: TOKEN MANAGEMENT - CONTROLLING LENGTH AND COST")
-print("="*60)
+print("=" * 60)
 
 """
 Tokens are the building blocks of LLM processing (roughly 3/4 of a word).
@@ -186,9 +186,9 @@ and response style. Lower limits force conciseness!
 # Hint: The AI will be forced to give a very brief, focused answer
 """
 
-print("\n" + "="*60)
+print("\n" + "=" * 60)
 print("EXAMPLE 4: ADVANCED PARAMETER COMBINATIONS")
-print("="*60)
+print("=" * 60)
 
 """
 CONCEPT: Parameter Synergy
@@ -249,9 +249,9 @@ combinations. Start with these proven configs and adjust for your needs!
 # Hint: Consider age-appropriate language, engagement, and educational goals
 """
 
-print("\n" + "="*60)
+print("\n" + "=" * 60)
 print("EXAMPLE 5: REAL-WORLD APPLICATIONS")
-print("="*60)
+print("=" * 60)
 
 """
 🌟 PUTTING IT ALL TOGETHER: Real-World Scenarios
@@ -315,9 +315,9 @@ print("""
 # Hint: Start with problems you face in your daily work or studies
 """)
 
-print("\n" + "="*70)
+print("\n" + "=" * 70)
 print("🎉 CONGRATULATIONS! YOU'VE MASTERED LLM BASICS")
-print("="*70)
+print("=" * 70)
 
 """
 🧠 WHAT YOU'VE LEARNED:
