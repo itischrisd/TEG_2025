@@ -94,7 +94,6 @@ A comprehensive course on Generative AI—from foundational concepts to advanced
 - [Multi-Agent Systems with LangGraph (14:32)](https://youtu.be/zpLEZFddNp4)
 - [Research Assistan (18:43)](https://youtu.be/zo86jj_1VEY)
 - [Multi-Agents Systems with A2A (18:15)](https://youtu.be/dC4mJuyqnqE)
--
 
 **Slides:** [slides/5. Tools and Agents](https://github.com/wodecki/TEG_2025/blob/main/slides/5.%20Tools%20and%20Agents)
 
