@@ -7,7 +7,9 @@ import os
 from typing import Any
 import httpx
 from mcp.server.fastmcp import FastMCP
+from dotenv import load_dotenv
 
+load_dotenv(override=True)
 # Initialize FastMCP server
 mcp = FastMCP("tavily")
 

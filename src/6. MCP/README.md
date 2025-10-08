@@ -4,63 +4,54 @@ A collection of Model Context Protocol (MCP) servers providing various tools for
 
 ## Quick Start for Students
 
-We provide three different demo approaches - start with the simplest:
+We provide two demo approaches for different use cases:
 
-### 1. **Start Simple: Direct Function Calls**
+### 1. **Interactive Demo (Jupyter/Notebook)**
 ```bash
-uv run 1_direct_demo.py
+# Open 1.mcp_demo.py in Jupyter notebook
+# Run each section (SECTION 1, 2, 3) in separate cells
 ```
-This calls the server functions directly (no MCP protocol). Perfect to understand **what** each tool does.
+This demonstrates MCP protocol in an interactive format. Perfect for step-by-step learning and experimentation.
+- **File**: `1.mcp_demo.py`
+- **Use**: Run sections individually in Jupyter or async REPL
+- **Demos**: Math server, Weather server (OpenWeatherMap), Wikipedia server
 
-### 2. **Learn MCP Protocol: Fixed Demo**
+### 2. **Command Line Demo (CLI)**
 ```bash
-uv run 2_simple_demo.py
+uv run "2.mcp_demo - CLI.py"
 ```
-This uses proper MCP client with initialization. Shows **how** to use MCP protocol correctly.
+This runs all MCP demos sequentially from the command line.
+- **File**: `2.mcp_demo - CLI.py`
+- **Use**: Quick full demonstration of all servers
+- **Demos**: Complete walkthrough of math, weather, and Wikipedia servers
 
-### 3. **Advanced MCP Usage**
-```bash
-uv run 3_mcp_client_demo.py
-```
-This demonstrates more detailed MCP client patterns with better error handling and explanations.
 
-### 4. **Run Individual Servers**
-```bash
-python3 run_server.py math     # Math operations
-python3 run_server.py weather  # US weather data
-```
-
-**Learning Path**: `direct_demo.py` → `simple_demo.py` → `mcp_client_demo.py` → Build your own!
+**Learning Path**: Start with `2.mcp_demo - CLI.py` → Experiment with `1.mcp_demo.py` → Build your own!
 
 ## Demo Scripts Explained
 
-### `direct_demo.py` - Functions Without MCP 🎯
-- **Purpose**: Understand what each tool does
-- **Approach**: Imports server modules directly, calls functions
-- **Pros**: Simple, fast, no protocol complexity
-- **Cons**: Not how MCP is actually used
-- **Best for**: First-time learners, debugging tool logic
+### `1.mcp_demo.py` - Interactive MCP Demo 📓
+- **Purpose**: Learn MCP protocol interactively
+- **Approach**: Three sections that can be run independently in Jupyter cells
+- **Pros**: Step-by-step execution, easy to modify and experiment
+- **Cons**: Requires async-capable environment (Jupyter, IPython)
+- **Best for**: Understanding MCP protocol flow, experimentation, teaching
+- **Servers**: Math, Weather (OpenWeatherMap), Wikipedia
 
-### `simple_demo.py` - MCP Protocol Made Simple 🔧
-- **Purpose**: Learn proper MCP client usage
-- **Approach**: Uses MCP ClientSession with initialization
-- **Pros**: Shows correct MCP pattern, educational comments
-- **Cons**: Creates new connection per tool call (inefficient)
-- **Best for**: Understanding MCP protocol basics
-
-### `mcp_client_demo.py` - Production-Ready MCP 🚀
-- **Purpose**: Advanced MCP client patterns
-- **Approach**: Efficient connections, better error handling
-- **Pros**: Closer to real-world usage, demonstrates best practices
-- **Cons**: More complex code structure
-- **Best for**: Building actual MCP applications
+### `2.mcp_demo - CLI.py` - Command Line MCP Demo 🚀
+- **Purpose**: Complete demonstration of all MCP servers
+- **Approach**: Async functions with proper error handling
+- **Pros**: Easy to run, shows all servers, production-ready patterns
+- **Cons**: Runs all demos sequentially (takes longer)
+- **Best for**: Quick overview, testing all servers, reference implementation
+- **Servers**: Math, Weather (OpenWeatherMap), Wikipedia
 
 ## Overview
 
 This repository contains five MCP servers, each providing specialized functionality:
 
 - **math_server**: Mathematical operations and calculations
-- **weather_server**: Weather data from US National Weather Service
+- **weather_server**: Global weather data from OpenWeatherMap API
 - **tavily_server**: Web search capabilities via Tavily API
 - **arxiv_server**: Academic paper search from ArXiv
 - **wikipedia_server**: Wikipedia article search and retrieval
@@ -80,24 +71,29 @@ This repository contains five MCP servers, each providing specialized functional
    curl -LsSf https://astral.sh/uv/install.sh | sh
    ```
 
-3. **Set up environment variables** (optional, for specific servers):
+3. **Set up environment variables** (create `.env` file or export):
    ```bash
+   # For Tavily search server
    export TAVILY_API_KEY="your_tavily_api_key_here"
+   
+   # For Weather server
+   export OPENWEATHERMAP_API_KEY="your_openweathermap_api_key_here"
    ```
 
-4. **Run servers with uv**:
+   Or create a `.env` file in the MCP directory:
+   ```
+   TAVILY_API_KEY=your_tavily_api_key_here
+   OPENWEATHERMAP_API_KEY=your_openweathermap_api_key_here
+   ```
+
+4. **Run demo scripts**:
    ```bash
-   # Using the helper script (recommended)
-   python3 run_server.py math
-   python3 run_server.py weather
+   # Command line demo (runs all servers sequentially)
+   uv run "2.mcp_demo - CLI.py"
    
-   # Or run directly with dependencies
+   # Or run servers directly with dependencies
    uv run --with mcp --with httpx math_server/math.py
-   uv run --with mcp --with httpx weather_server/weather.py
-   
-   # Run example scripts
-   uv run --with mcp --with httpx run_example.py
-   uv run --with mcp --with httpx run_natural_language.py
+   OPENWEATHERMAP_API_KEY="your_key" uv run --with mcp --with httpx --with python-dotenv weather_server/weather.py
    ```
 
 ## Server Details
@@ -131,22 +127,32 @@ uv run math_server/math.py
 
 **Location**: `weather_server/`
 
+**Requirements**: `OPENWEATHERMAP_API_KEY` environment variable
+
 **Tools**:
-- `get_alerts(state)`: Get weather alerts for US state (e.g., "CA", "NY")
+- `get_weather_by_city(city, country_code="")`: Get current weather for a city by name
 - `get_forecast(latitude, longitude)`: Get 5-day forecast for coordinates
 - `get_current_conditions(latitude, longitude)`: Get current weather conditions
 
-**Data Source**: US National Weather Service API
+**Data Source**: OpenWeatherMap API (global coverage)
 
 **Usage**:
 ```bash
+# Set API key first
+export OPENWEATHERMAP_API_KEY="your_api_key"
 uv run weather_server/weather.py
 ```
 
-**Example**:
+**Examples**:
 ```python
-# Get forecast for San Francisco
-{"tool": "get_forecast", "args": {"latitude": 37.7749, "longitude": -122.4194}}
+# Get weather by city name
+{"tool": "get_weather_by_city", "args": {"city": "Warsaw", "country_code": "PL"}}
+
+# Get forecast for coordinates (Warsaw)
+{"tool": "get_forecast", "args": {"latitude": 52.2297, "longitude": 21.0122}}
+
+# Get current conditions
+{"tool": "get_current_conditions", "args": {"latitude": 52.2297, "longitude": 21.0122}}
 ```
 
 ### 🔍 Tavily Server
@@ -218,19 +224,19 @@ uv run wikipedia_server/wikipedia.py
 Each server can be run independently using Python:
 
 ```bash
-# Math operations
+# Math operations (no API key required)
 uv run math_server/math.py
 
-# Weather data
-uv run weather_server/weather.py
+# Weather data (requires OpenWeatherMap API key)
+OPENWEATHERMAP_API_KEY="your_key" uv run weather_server/weather.py
 
-# Web search (requires API key)
+# Web search (requires Tavily API key)
 TAVILY_API_KEY="your_key" uv run tavily_server/tavily.py
 
-# Academic papers
+# Academic papers (no API key required)
 uv run arxiv_server/arxiv.py
 
-# Wikipedia
+# Wikipedia (no API key required)
 uv run wikipedia_server/wikipedia.py
 ```
 
@@ -251,9 +257,11 @@ Add to your `claude_desktop_config.json`:
       "env": {}
     },
     "weather": {
-      "command": "uv", 
+      "command": "uv",
       "args": ["run", "/path/to/weather_server/weather.py"],
-      "env": {}
+      "env": {
+        "OPENWEATHERMAP_API_KEY": "your_api_key_here"
+      }
     },
     "tavily": {
       "command": "uv",
@@ -285,9 +293,9 @@ Add to your `claude_desktop_config.json`:
 4. Perform calculations related to findings
 
 ### Weather Planning
-1. Get current conditions for multiple locations
-2. Check weather alerts for travel areas
-3. Get detailed forecasts for event planning
+1. Get current conditions for cities worldwide
+2. Get 5-day forecasts for travel destinations
+3. Compare weather across multiple locations using coordinates
 
 ### Academic Research
 1. Search ArXiv by category or author
@@ -316,7 +324,6 @@ MCP/
 │   └── pyproject.toml
 ├── ref_agents/          # Original LangChain examples
 ├── ref_weather_server/  # Original reference implementation
-├── run_example.py       # Demonstration script
 └── README.md           # This file
 ```
 
@@ -356,6 +363,11 @@ Follow the pattern established in existing servers:
   - Get from: https://tavily.com/
   - Used by: `tavily_server`
 
+- **OPENWEATHERMAP_API_KEY**: Required for weather functionality
+  - Get from: https://openweathermap.org/api
+  - Used by: `weather_server`
+  - Free tier available with 1000 calls/day
+
 ## Troubleshooting
 
 ### Common Issues
@@ -364,11 +376,16 @@ Follow the pattern established in existing servers:
 
 2. **Tavily authentication errors**: Ensure `TAVILY_API_KEY` is set correctly
 
-3. **Weather server location errors**: Verify coordinates are for US locations (NWS API limitation)
+3. **Weather server authentication errors**: Ensure `OPENWEATHERMAP_API_KEY` is set correctly and valid
 
-4. **ArXiv search returns no results**: Try broader search terms or different categories
+4. **Weather server returns no data**: Check that:
+   - API key is active and has available calls
+   - City name is spelled correctly
+   - Coordinates are valid (latitude: -90 to 90, longitude: -180 to 180)
 
-5. **Wikipedia disambiguation pages**: Use more specific article titles
+5. **ArXiv search returns no results**: Try broader search terms or different categories
+
+6. **Wikipedia disambiguation pages**: Use more specific article titles
 
 ### Debug Mode
 

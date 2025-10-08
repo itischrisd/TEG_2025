@@ -1,97 +1,91 @@
 """
-Weather Server - MCP server providing US weather data from National Weather Service.
-No API key required, works with US locations only.
+Weather Server - MCP server providing weather data from OpenWeatherMap.
+Requires OPENWEATHERMAP_API_KEY environment variable.
 """
 
+import os
 from typing import Any
 import httpx
 from mcp.server.fastmcp import FastMCP
+from dotenv import load_dotenv
+
+# Load environment variables
+load_dotenv(override=True)
 
 # Initialize FastMCP server
 mcp = FastMCP("weather")
 
 # Constants
-NWS_API_BASE = "https://api.weather.gov"
-USER_AGENT = "weather-app/1.0"
+OPENWEATHER_API_BASE = "https://api.openweathermap.org/data/2.5"
+API_KEY = os.getenv("OPENWEATHERMAP_API_KEY")
 
-async def make_nws_request(url: str) -> dict[str, Any] | None:
-    """Make a request to the NWS API with proper error handling."""
-    headers = {
-        "User-Agent": USER_AGENT,
-        "Accept": "application/geo+json"
-    }
+if not API_KEY:
+    raise ValueError("OPENWEATHERMAP_API_KEY environment variable is required")
+
+async def make_weather_request(url: str, params: dict[str, Any]) -> dict[str, Any] | None:
+    """Make a request to the OpenWeatherMap API with proper error handling."""
+    params["appid"] = API_KEY
+    params["units"] = "metric"
+
     async with httpx.AsyncClient() as client:
         try:
-            response = await client.get(url, headers=headers, timeout=30.0)
+            response = await client.get(url, params=params, timeout=30.0)
             response.raise_for_status()
             return response.json()
-        except Exception:
+        except httpx.HTTPStatusError as e:
+            print(f"HTTP error: {e.response.status_code} - {e.response.text}")
             return None
-
-def format_alert(feature: dict) -> str:
-    """Format an alert feature into a readable string."""
-    props = feature["properties"]
-    return f"""
-Event: {props.get('event', 'Unknown')}
-Area: {props.get('areaDesc', 'Unknown')}
-Severity: {props.get('severity', 'Unknown')}
-Description: {props.get('description', 'No description available')}
-Instructions: {props.get('instruction', 'No specific instructions provided')}
-"""
-
-# Each @mcp.tool() creates an MCP tool that clients can call
-@mcp.tool()
-async def get_alerts(state: str) -> str:
-    """Get weather alerts for a US state.
-
-    Args:
-        state: Two-letter US state code (e.g. CA, NY)
-    """
-    url = f"{NWS_API_BASE}/alerts/active/area/{state}"
-    data = await make_nws_request(url)
-
-    if not data or "features" not in data:
-        return "Unable to fetch alerts or no alerts found."
-
-    if not data["features"]:
-        return "No active alerts for this state."
-
-    alerts = [format_alert(feature) for feature in data["features"]]
-    return "\n---\n".join(alerts)
+        except Exception as e:
+            print(f"Request error: {e}")
+            return None
 
 @mcp.tool()
 async def get_forecast(latitude: float, longitude: float) -> str:
-    """Get weather forecast for a location.
+    """Get 5-day weather forecast for a location.
 
     Args:
         latitude: Latitude of the location
         longitude: Longitude of the location
     """
-    # First get the forecast grid endpoint
-    points_url = f"{NWS_API_BASE}/points/{latitude},{longitude}"
-    points_data = await make_nws_request(points_url)
+    url = f"{OPENWEATHER_API_BASE}/forecast"
+    params = {
+        "lat": latitude,
+        "lon": longitude
+    }
 
-    if not points_data:
+    data = await make_weather_request(url, params)
+
+    if not data or "list" not in data:
         return "Unable to fetch forecast data for this location."
 
-    # Get the forecast URL from the points response
-    forecast_url = points_data["properties"]["forecast"]
-    forecast_data = await make_nws_request(forecast_url)
+    # Format the forecast
+    city_name = data.get("city", {}).get("name", "Unknown location")
+    forecasts = [f"5-Day Forecast for {city_name}:"]
 
-    if not forecast_data:
-        return "Unable to fetch detailed forecast."
+    # Group by day and take one forecast per day (midday forecast)
+    seen_dates = set()
+    for item in data["list"]:
+        date = item["dt_txt"].split()[0]
+        time = item["dt_txt"].split()[1]
 
-    # Format the periods into a readable forecast
-    periods = forecast_data["properties"]["periods"]
-    forecasts = []
-    for period in periods[:5]:  # Only show next 5 periods
-        forecast = f"""
-{period['name']}:
-Temperature: {period['temperature']}°{period['temperatureUnit']}
-Wind: {period['windSpeed']} {period['windDirection']}
-Forecast: {period['detailedForecast']}
+        # Take midday forecast (12:00:00) or first forecast of the day
+        if date not in seen_dates and (time == "12:00:00" or len(seen_dates) < 5):
+            seen_dates.add(date)
+            weather = item["weather"][0]
+            temp = item["main"]
+            wind = item["wind"]
+
+            forecast = f"""
+Date: {date} {time}
+Temperature: {temp['temp']}°C (feels like {temp['feels_like']}°C)
+Weather: {weather['main']} - {weather['description']}
+Humidity: {temp['humidity']}%
+Wind: {wind['speed']} m/s
 """
-        forecasts.append(forecast)
+            forecasts.append(forecast)
+
+            if len(seen_dates) >= 5:
+                break
 
     return "\n---\n".join(forecasts)
 
@@ -103,42 +97,70 @@ async def get_current_conditions(latitude: float, longitude: float) -> str:
         latitude: Latitude of the location
         longitude: Longitude of the location
     """
-    # First get the forecast grid endpoint
-    points_url = f"{NWS_API_BASE}/points/{latitude},{longitude}"
-    points_data = await make_nws_request(points_url)
+    url = f"{OPENWEATHER_API_BASE}/weather"
+    params = {
+        "lat": latitude,
+        "lon": longitude
+    }
 
-    if not points_data:
+    data = await make_weather_request(url, params)
+
+    if not data:
         return "Unable to fetch weather data for this location."
 
-    # Get the observation stations URL
-    stations_url = points_data["properties"]["observationStations"]
-    stations_data = await make_nws_request(stations_url)
+    # Extract weather information
+    location_name = data.get("name", "Unknown location")
+    weather = data["weather"][0]
+    main = data["main"]
+    wind = data["wind"]
+    clouds = data.get("clouds", {})
+    sys_info = data.get("sys", {})
 
-    if not stations_data or not stations_data.get("features"):
-        return "Unable to find weather stations for this location."
-
-    # Get the first station's latest observation
-    station_id = stations_data["features"][0]["properties"]["stationIdentifier"]
-    observations_url = f"{NWS_API_BASE}/stations/{station_id}/observations/latest"
-    observation_data = await make_nws_request(observations_url)
-
-    if not observation_data:
-        return "Unable to fetch current conditions."
-
-    props = observation_data["properties"]
-    
-    # Convert Celsius to Fahrenheit if needed
-    temp_c = props.get("temperature", {}).get("value")
-    temp_f = round(temp_c * 9/5 + 32) if temp_c else "N/A"
-    
     return f"""
-Current Conditions:
-Temperature: {temp_f}°F
-Humidity: {props.get('relativeHumidity', {}).get('value', 'N/A')}%
-Wind Speed: {props.get('windSpeed', {}).get('value', 'N/A')} m/s
-Wind Direction: {props.get('windDirection', {}).get('value', 'N/A')}°
-Barometric Pressure: {props.get('barometricPressure', {}).get('value', 'N/A')} Pa
-Weather Description: {props.get('textDescription', 'No description available')}
+Current Weather in {location_name}:
+Temperature: {main['temp']}°C (feels like {main['feels_like']}°C)
+Weather: {weather['main']} - {weather['description']}
+Humidity: {main['humidity']}%
+Pressure: {main['pressure']} hPa
+Wind Speed: {wind['speed']} m/s
+Wind Direction: {wind.get('deg', 'N/A')}°
+Cloudiness: {clouds.get('all', 'N/A')}%
+Sunrise: {sys_info.get('sunrise', 'N/A')}
+Sunset: {sys_info.get('sunset', 'N/A')}
+"""
+
+@mcp.tool()
+async def get_weather_by_city(city: str, country_code: str = "") -> str:
+    """Get current weather for a city by name.
+
+    Args:
+        city: City name (e.g., "London", "New York")
+        country_code: Optional ISO 3166 country code (e.g., "GB", "US")
+    """
+    url = f"{OPENWEATHER_API_BASE}/weather"
+    query = f"{city},{country_code}" if country_code else city
+    params = {"q": query}
+
+    data = await make_weather_request(url, params)
+
+    if not data:
+        return f"Unable to fetch weather data for {city}."
+
+    # Extract weather information
+    location_name = data.get("name", city)
+    country = data.get("sys", {}).get("country", "")
+    weather = data["weather"][0]
+    main = data["main"]
+    wind = data["wind"]
+
+    return f"""
+Current Weather in {location_name}, {country}:
+Temperature: {main['temp']}°C (feels like {main['feels_like']}°C)
+Weather: {weather['main']} - {weather['description']}
+Humidity: {main['humidity']}%
+Pressure: {main['pressure']} hPa
+Wind Speed: {wind['speed']} m/s
+Coordinates: lat={data['coord']['lat']}, lon={data['coord']['lon']}
 """
 
 if __name__ == "__main__":

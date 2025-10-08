@@ -9,7 +9,7 @@ A comprehensive course on Generative AI—from foundational concepts to advanced
 ## 📚 Course Materials
 
 ### 1. Introduction
-**Lectures:** 
+**Lectures:**
 - [Course Introduction (03:33)](https://www.youtube.com/watch?v=46FcfsccTyk)
 - [How GenAI Works? (26:38)](https://youtu.be/q-As4OK1f5E)
 
@@ -25,7 +25,7 @@ A comprehensive course on Generative AI—from foundational concepts to advanced
 ---
 
 ### 2. Tokenization, Embeddings, and Transformers
-**Lectures:** 
+**Lectures:**
 - [Tokenization (6:14)](https://youtu.be/mltPLwiCPZM)
 - [Embeddings (23:54)](https://youtu.be/P2DnCGjcukA)
 - [Transformers - attention (49:36)](https://youtu.be/8iarkQsyzbw)
@@ -42,11 +42,11 @@ A comprehensive course on Generative AI—from foundational concepts to advanced
 ---
 
 ### 3. Retrieval Augmented Generation (RAG)
-**Lectures:** 
+**Lectures:**
 - [RAG - foundations (21:41)](https://youtu.be/xtctSETgUgM)
 - [RAG - evaluation (17:59)](https://youtu.be/MiTLJKbO1Q8)
 
-**Demo:** 
+**Demo:**
 - [Minimal RAG (20:41)](https://youtu.be/mJdh5C5yhRg)
 - [Chunking (9:14)](https://youtu.be/t_aAjH8Tbjg)
 - [Vector Stores (16:37)](https://youtu.be/YtbxYn9aaok)
@@ -67,7 +67,10 @@ A comprehensive course on Generative AI—from foundational concepts to advanced
 **Lectures:**
 - [Chains and Graphs (37:15)](https://youtu.be/MKMycsxvEpI)
 
-**Demo:** [Placeholder - Will appear here soon]
+**Demo:**
+- [Basig Graph (13:34)](https://youtu.be/60xH5NRZcQ0)
+- [Parallel Processing (13:10)](https://youtu.be/qUSoNGCMVXw)
+- [Map Reduce (09:53)](https://youtu.be/fc0EfMK0ppg)
 
 **Slides:** [slides/4. Graphs](https://github.com/wodecki/TEG_2025/blob/main/slides/4.%20Graphs)
 
@@ -76,13 +79,21 @@ A comprehensive course on Generative AI—from foundational concepts to advanced
 ---
 
 ### 5. Tools and Agents
-**Lectures:** 
+**Lectures:**
 - [Tools and Agents (21:41)](https://youtu.be/p3vluBH5hww)
 - [Functions, LLMs, and Agents - a wider picture (16:54)](https://youtu.be/m2J5H27u2is)
 - [Multi-Agent Architectures (18:57)](https://youtu.be/6kJqOPFMmA0)
 - [Agentic AI Evaluation (17:21)](https://youtu.be/VkDY4Zh6Cac)
 
-**Demo:** [Placeholder - Will appear here soon]
+**Demo:**
+- [OpenAI Function Calling (10:22)](https://youtu.be/-bzhMYKQH6Y)
+- [LangChain Tools (18:08)](https://youtu.be/oR423M8SWuk)
+- [LangGraph ReAct (20:42)](https://youtu.be/PfhWyEFwRLY)
+- [Complex Agent - Part 1 (12:26)](https://youtu.be/I1_i41UGPTQ)
+- [Complex Agent - Part 2 (12:19)](https://youtu.be/YxufE6z6PJE)
+- [Multi-Agent Systems with LangGraph (14:32)](https://youtu.be/zpLEZFddNp4)
+- [Research Assistan (18:43)](https://youtu.be/zo86jj_1VEY)
+- [Multi-Agents Systems with A2A (18:15)](https://youtu.be/dC4mJuyqnqE)
 
 **Slides:** [slides/5. Tools and Agents](https://github.com/wodecki/TEG_2025/blob/main/slides/5.%20Tools%20and%20Agents)
 
@@ -95,7 +106,8 @@ A comprehensive course on Generative AI—from foundational concepts to advanced
 - [Model Context Protocol - Introduction (35:50)](https://youtu.be/_eBMpvvijXI)
 - [MCP vs Agentic AI (8:40)](https://youtu.be/OsLQGOkfTr8)
 
-**Demo:** [Placeholder - Will appear here soon]
+**Demo:**
+- [MCP (10:42)](https://youtu.be/7kwvodH4UVs)
 
 **Slides:** [slides/6. MCP](https://github.com/wodecki/TEG_2025/blob/main/slides/6.%20MCP)
 

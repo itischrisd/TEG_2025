@@ -13,7 +13,7 @@ from langgraph_supervisor import create_supervisor
 
 # Load environment variables
 from dotenv import load_dotenv
-load_dotenv()
+load_dotenv(override=True)
 
 os.environ["OPENAI_API_KEY"] = os.getenv("OPENAI_API_KEY")
 os.environ["TAVILY_API_KEY"] = os.getenv("TAVILY_API_KEY")
@@ -121,6 +121,7 @@ q1 = "What's 2**3?"
 q2 = "Tell me about Paris"
 q3 = "What is the weather in Paris?"
 q4 = "What are the current advances in quantum computing?"
+q5 = "What's the square of the temperature in place where Adam Mickiewicz was born?"
 
 response = graph.invoke({
     "messages": [
