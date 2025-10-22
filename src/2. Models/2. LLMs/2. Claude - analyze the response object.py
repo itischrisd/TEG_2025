@@ -9,10 +9,11 @@ Required environment variables:
 - ANTHROPIC_API_KEY: Your Anthropic API key
 """
 
-from dotenv import load_dotenv
 import os
 import textwrap
+
 import anthropic
+from dotenv import load_dotenv
 
 # Load environment variables from .env file
 load_dotenv(override=True)
@@ -63,7 +64,6 @@ print()
 answer_text = response.content[0].text
 print(textwrap.fill(answer_text, width=80))
 
-
 # Analyze the response object structure
 print("=== Response Object Analysis ===")
 print()
@@ -100,7 +100,7 @@ if response.usage:
     total = response.usage.input_tokens + response.usage.output_tokens
     print(f"Total tokens: {total}")
 
-print("\n" + "="*60)
+print("\n" + "=" * 60)
 print("Note: Claude API structure differs from OpenAI:")
 print("- Uses 'messages.create()' instead of 'chat.completions.create()'")
 print("- Content is in 'content[0].text' instead of 'choices[0].message.content'")

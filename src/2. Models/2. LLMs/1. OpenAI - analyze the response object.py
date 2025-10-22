@@ -9,15 +9,14 @@ and the actual content.
 Required environment variables:
 - OPENAI_API_KEY: Your OpenAI API key
 """
-import textwrap
-from openai import OpenAI
 from dotenv import load_dotenv
+from openai import AzureOpenAI
 
 # Use override=True to ensure project-specific settings take precedence
 load_dotenv(override=True)
 
 # Initialize OpenAI client - this creates our connection to the LLM service
-client = OpenAI()
+client = AzureOpenAI()
 
 system_prompt = "You are a helpful assistant who explains concepts clearly and concisely."
 question = "Why is the sky blue?"
@@ -80,13 +79,13 @@ if response.usage:
     print(f"Prompt tokens: {response.usage.prompt_tokens}")
     print(f"Completion tokens: {response.usage.completion_tokens}")
     print(f"Total tokens: {response.usage.total_tokens}")
-    
+
     # Check if detailed usage information is available
     if hasattr(response.usage, 'completion_tokens_details'):
         details = response.usage.completion_tokens_details
         print(f"Reasoning tokens: {details.reasoning_tokens}")
         print(f"Audio tokens: {details.audio_tokens}")
 
-print("\n" + "="*60)
+print("\n" + "=" * 60)
 print("Note: The response object contains rich metadata that can be used")
 print("for monitoring, logging, and understanding API usage patterns.")
