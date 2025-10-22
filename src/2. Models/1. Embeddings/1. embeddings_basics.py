@@ -30,22 +30,23 @@ properties to advanced vector arithmetic, designed for educational purposes.
 Author: Educational Demo for TEG 2025 E-learning
 """
 
-import numpy as np
-from openai import OpenAI
-from sklearn.metrics.pairwise import cosine_similarity
-from sklearn.decomposition import PCA
 import matplotlib.pyplot as plt
+import numpy as np
 import seaborn as sns
 from dotenv import load_dotenv
+from openai import AzureOpenAI
+from sklearn.decomposition import PCA
+from sklearn.metrics.pairwise import cosine_similarity
 
 load_dotenv(override=True)
 
-client = OpenAI()
+client = AzureOpenAI()
 embeddings_cache = {}
 
-print("\n" + "="*60)
+print("\n" + "=" * 60)
 print("DEMO 1: BASIC EMBEDDINGS")
-print("="*60)
+print("=" * 60)
+
 
 def get_embedding(text, model="text-embedding-3-small"):
     """Generate an embedding vector for the given text using OpenAI's API."""
@@ -57,6 +58,7 @@ def get_embedding(text, model="text-embedding-3-small"):
     embeddings_cache[text] = embedding
     print(f"Generated embedding for: '{text}' (dimension: {len(embedding)})")
     return embedding
+
 
 word = "cat"
 embedding = get_embedding(word)
@@ -72,17 +74,20 @@ print(f"Max value: {max(embedding):.6f}")
 print(f"Mean: {np.mean(embedding):.6f}")
 print(f"Standard deviation: {np.std(embedding):.6f}")
 
-print("\n" + "="*60)
+print("\n" + "=" * 60)
 print("DEMO 2: WORD SIMILARITY ANALYSIS")
-print("="*60)
+print("=" * 60)
+
 
 def cosine_sim(vec1, vec2):
     """Calculate cosine similarity between two vectors."""
     return cosine_similarity([vec1], [vec2])[0][0]
 
+
 def euclidean_dist(vec1, vec2):
     """Calculate Euclidean distance between two vectors."""
     return np.linalg.norm(np.array(vec1) - np.array(vec2))
+
 
 def compare_words(word1, word2):
     """Compare two words using different similarity metrics."""
@@ -98,6 +103,7 @@ def compare_words(word1, word2):
         "euclidean_distance": euclidean_distance,
         "dot_product": dot_product
     }
+
 
 word_pairs = [
     ("cat", "dog"),
@@ -125,9 +131,9 @@ print("• Higher cosine similarity = more semantically similar")
 print("• Lower euclidean distance = more similar")
 print("• Dot product magnitude correlates with similarity")
 
-print("\n" + "="*60)
+print("\n" + "=" * 60)
 print("DEMO 3: THE CAT-DOG MYSTERY")
-print("="*60)
+print("=" * 60)
 
 cat_dog_metrics = compare_words("cat", "dog")
 cat_kitten_metrics = compare_words("cat", "kitten")
@@ -145,9 +151,10 @@ if cat_dog_metrics['cosine_similarity'] > cat_kitten_metrics['cosine_similarity'
     print("• Semantic level relationships (adult animals)")
     print("• NOT biological or taxonomic relationships")
 
-print("\n" + "="*60)
+print("\n" + "=" * 60)
 print("DEMO 4: CONTEXT MATTERS")
-print("="*60)
+print("=" * 60)
+
 
 def get_embeddings_batch(texts, model="text-embedding-3-small"):
     """Generate embeddings for multiple texts in a single API call."""
@@ -161,6 +168,7 @@ def get_embeddings_batch(texts, model="text-embedding-3-small"):
             embeddings_cache[text] = response.data[i].embedding
 
     return [embeddings_cache[text] for text in texts]
+
 
 contexts = [
     "The {} is sleeping peacefully",
@@ -190,9 +198,9 @@ for context in contexts:
 
 print("\nKey Insight: Context can reverse similarity relationships!")
 
-print("\n" + "="*60)
+print("\n" + "=" * 60)
 print("DEMO 5: SEMANTIC CLUSTERS VISUALIZATION")
-print("="*60)
+print("=" * 60)
 
 word_groups = {
     "Animals": ["cat", "dog", "kitten", "puppy", "bird", "fish"],
@@ -226,9 +234,7 @@ for i, (group, color) in enumerate(zip(word_groups.keys(), colors)):
     plt.scatter(group_x, group_y, c=color, label=group, alpha=0.7, s=100)
 
     for idx in group_indices:
-        plt.annotate(all_words[idx],
-                   (reduced_embeddings[idx, 0], reduced_embeddings[idx, 1]),
-                   fontsize=10, alpha=0.8)
+        plt.annotate(all_words[idx],(reduced_embeddings[idx, 0], reduced_embeddings[idx, 1]), fontsize=10, alpha=0.8)
 
 plt.xlabel(f'First Principal Component (explains {pca.explained_variance_ratio_[0]:.1%} variance)')
 plt.ylabel(f'Second Principal Component (explains {pca.explained_variance_ratio_[1]:.1%} variance)')
@@ -245,7 +251,7 @@ intra_similarities = []
 inter_similarities = []
 
 for i in range(len(all_words)):
-    for j in range(i+1, len(all_words)):
+    for j in range(i + 1, len(all_words)):
         sim = cosine_sim(cluster_embeddings[i], cluster_embeddings[j])
 
         if word_to_group[all_words[i]] == word_to_group[all_words[j]]:
@@ -258,9 +264,9 @@ print(f"Average intra-cluster similarity: {np.mean(intra_similarities):.4f}")
 print(f"Average inter-cluster similarity: {np.mean(inter_similarities):.4f}")
 print(f"Clustering effectiveness: {np.mean(intra_similarities) - np.mean(inter_similarities):.4f}")
 
-print("\n" + "="*60)
+print("\n" + "=" * 60)
 print("DEMO 6: SIMILARITY HEATMAP")
-print("="*60)
+print("=" * 60)
 
 heatmap_words = ["cat", "kitten", "dog", "puppy", "animal", "pet", "feline", "canine"]
 heatmap_embeddings = get_embeddings_batch(heatmap_words)
@@ -297,9 +303,9 @@ print(f"\nMost similar pair: {heatmap_words[max_idx[0]]}-{heatmap_words[max_idx[
 print(f"Least similar pair: {heatmap_words[min_idx[0]]}-{heatmap_words[min_idx[1]]} "
       f"(similarity: {similarity_matrix[min_idx]:.4f})")
 
-print("\n" + "="*60)
+print("\n" + "=" * 60)
 print("DEMO 7: VECTOR ARITHMETIC - THE FAMOUS KING-QUEEN ANALOGY")
-print("="*60)
+print("=" * 60)
 
 print("🎯 Exploring the famous: king - man + woman ≈ queen")
 print("This demonstrates how embeddings capture semantic relationships!\n")
@@ -408,11 +414,11 @@ for word1, word2, word3, target in concept_analogies:
     analogy_str = f"{word1} - {word2} + {word3}"
     print(f"{analogy_str:<25} {target:<10} {similarity:>12.4f}")
 
-print("\n" + "="*60)
+print("\n" + "=" * 60)
 print("🎉 COMPREHENSIVE EMBEDDINGS DEMO COMPLETE!")
-print("="*60)
+print("=" * 60)
 print("\n🔍 KEY INSIGHTS FROM OUR EXPLORATION:")
-print("="*60)
+print("=" * 60)
 print("1. 📊 BASIC PROPERTIES:")
 print("   • Embeddings are high-dimensional vectors (1536 dimensions)")
 print("   • OpenAI normalizes embeddings to unit length (~1.0 magnitude)")
