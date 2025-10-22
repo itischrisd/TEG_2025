@@ -52,7 +52,6 @@ $tf/
 *.iml
 *.iobj
 *.ipdb
-*.ipynb
 *.iws
 *.jfm
 *.jmconfig
